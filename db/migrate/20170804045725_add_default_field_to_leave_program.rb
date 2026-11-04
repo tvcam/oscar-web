@@ -1,4 +1,4 @@
-class AddDefaultFieldToLeaveProgram < ActiveRecord::Migration
+class AddDefaultFieldToLeaveProgram < ActiveRecord::Migration[4.2]
   def up
     change_column :leave_programs, :properties, :jsonb, default: {}
   end

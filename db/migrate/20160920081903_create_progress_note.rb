@@ -1,4 +1,4 @@
-class CreateProgressNote < ActiveRecord::Migration
+class CreateProgressNote < ActiveRecord::Migration[4.2]
   def change
     create_table :progress_notes do |t|
       t.date :date

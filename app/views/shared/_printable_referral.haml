@@ -67,7 +67,7 @@
       = t('referrals.show.type_of_service')
   .col-xs-12
     %ul
-      - referral.services.distinct.each do |service|
+      - referral.services.to_a.uniq.each do |service|
         %li= service.name
 
 .row

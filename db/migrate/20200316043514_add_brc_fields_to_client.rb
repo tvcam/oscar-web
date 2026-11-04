@@ -1,4 +1,4 @@
-class AddBrcFieldsToClient < ActiveRecord::Migration
+class AddBrcFieldsToClient < ActiveRecord::Migration[4.2]
   def change
     add_column :clients, :difficulties, :text
     add_column :clients, :household_members, :text

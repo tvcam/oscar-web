@@ -32,7 +32,7 @@ describe Api::V1::CaseNotesController, type: :request do
         before do
           case_note = { format: 'json', case_note: { meeting_date: Time.now, attendee: FFaker::Name.name, interaction_type: 'Visit', case_note_domain_groups_attributes: {'0' => {note: FFaker::Lorem.paragraph, domain_group_id: @domain_group.id}} } }
 
-          post "/api/v1/clients/#{client.id}/case_notes", case_note, @auth_headers
+          post "/api/v1/clients/#{client.id}/case_notes", params: case_note, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -43,7 +43,7 @@ describe Api::V1::CaseNotesController, type: :request do
       context 'when try to create case note with completed task' do
         before do
           case_note = { format: 'json', case_note: { meeting_date: Time.now, attendee: FFaker::Name.name, interaction_type: 'Visit', case_note_domain_groups_attributes: {'0' => {note: FFaker::Lorem.paragraph, domain_group_id: @domain_group.id, task_ids: tasks.map(&:id)}} } }
-          post "/api/v1/clients/#{client.id}/case_notes", case_note, @auth_headers
+          post "/api/v1/clients/#{client.id}/case_notes", params: case_note, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -59,7 +59,7 @@ describe Api::V1::CaseNotesController, type: :request do
       context 'when try to create case note without domain group' do
         before do
           case_note = { format: 'json', case_note: { meeting_date: Time.now, attendee: FFaker::Name.name, interaction_type: 'Visit', case_note_domain_groups_attributes: {'0' => {note: FFaker::Lorem.paragraph}} } }
-          post "/api/v1/clients/#{client.id}/case_notes", case_note, @auth_headers
+          post "/api/v1/clients/#{client.id}/case_notes", params: case_note, headers: @auth_headers
         end
 
         it 'should be return status 422' do
@@ -97,7 +97,7 @@ describe Api::V1::CaseNotesController, type: :request do
       context 'when try to update case note with incompleted tasks' do
         before do
           case_note_params = { format: 'json', case_note: { meeting_date: Time.now, case_note_domain_groups_attributes: {'0' => {note: FFaker::Lorem.paragraph, domain_group_id: @domain_group.id}} } }
-          put "/api/v1/clients/#{client.id}/case_notes/#{case_note.id}", case_note_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/case_notes/#{case_note.id}", params: case_note_params, headers: @auth_headers
         end
 
         xit 'should be return status 200' do
@@ -108,7 +108,7 @@ describe Api::V1::CaseNotesController, type: :request do
       context 'when try to update case note with completed task' do
         before do
           case_note_params = { format: 'json', case_note: { meeting_date: Time.now, case_note_domain_groups_attributes: {'0' => {note: FFaker::Lorem.paragraph, domain_group_id: @domain_group.id, task_ids: tasks.map(&:id)}} } }
-          put "/api/v1/clients/#{client.id}/case_notes/#{case_note.id}", case_note_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/case_notes/#{case_note.id}", params: case_note_params, headers: @auth_headers
         end
 
         xit 'should be return status 200' do
@@ -123,7 +123,7 @@ describe Api::V1::CaseNotesController, type: :request do
       context 'when try to update case note without domain group' do
         before do
           case_note_params = { format: 'json', case_note: { meeting_date: Time.now, case_note_domain_groups_attributes: {'0' => {note: FFaker::Lorem.paragraph}} } }
-          put "/api/v1/clients/#{client.id}/case_notes/#{case_note.id}", case_note_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/case_notes/#{case_note.id}", params: case_note_params, headers: @auth_headers
         end
 
         xit 'should be return status 422' do

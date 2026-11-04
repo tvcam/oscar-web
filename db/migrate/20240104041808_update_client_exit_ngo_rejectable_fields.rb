@@ -1,4 +1,4 @@
-class UpdateClientExitNgoRejectableFields < ActiveRecord::Migration
+class UpdateClientExitNgoRejectableFields < ActiveRecord::Migration[4.2]
   def up
     values = ExitNgo.with_deleted.map do |exit_ngo|
       next unless exit_ngo.client_id

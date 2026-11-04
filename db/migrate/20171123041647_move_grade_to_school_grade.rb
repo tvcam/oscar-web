@@ -1,4 +1,4 @@
-class MoveGradeToSchoolGrade < ActiveRecord::Migration
+class MoveGradeToSchoolGrade < ActiveRecord::Migration[4.2]
   def up
     Client.all.each do |c|
       school_grade = c.grade.nil? ? '' : c.grade

@@ -1,4 +1,4 @@
-class AddDemoToOrganizations < ActiveRecord::Migration
+class AddDemoToOrganizations < ActiveRecord::Migration[4.2]
   def change
     add_column :organizations, :demo, :boolean, default: false
 

@@ -1,4 +1,4 @@
-class CreateReferralHistories < ActiveRecord::Migration
+class CreateReferralHistories < ActiveRecord::Migration[4.2]
   def change
     create_table :referral_histories do |t|
       t.integer :client_id

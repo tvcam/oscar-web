@@ -8,7 +8,7 @@ class InternalReferralWorker
     program_stream_ids = args[2]
     program_streams = ProgramStream.where(id: program_stream_ids)
     program_streams.each do |program_stream|
-      users = program_stream.internal_referral_users.distinct
+      users = program_stream.internal_referral_users.to_a.uniq
       users.each do |user|
         next if user.email.blank?
 

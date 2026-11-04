@@ -676,7 +676,7 @@
                             = t('clients.form.ratanak_achievement_program_staff_client_ids')
                           %td
                             %strong
-                              - @client.ratanak_achievement_program_staff_clients.distinct.sort.each do |case_worker|
+                              - @client.ratanak_achievement_program_staff_clients.to_a.uniq.sort.each do |case_worker|
                                 %strong.label.label-default
                                   = user case_worker
                       - if policy(Client).show?(:mosavy_official)

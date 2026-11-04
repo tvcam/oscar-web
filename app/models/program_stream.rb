@@ -300,14 +300,14 @@ class ProgramStream < ActiveRecord::Base
   end
 
   def auto_update_exit_program
-    return unless exit_program_changed?
-    labels_update(exit_program_change.last, exit_program_was, leave_programs)
+    return unless saved_change_to_exit_program?
+    labels_update(saved_change_to_exit_program.last, exit_program_before_last_save, leave_programs)
   end
 
   def auto_update_enrollment
-    return unless enrollment_changed?
+    return unless saved_change_to_enrollment?
     enrollment_objs = attached_to_client? ? client_enrollments : enrollments
-    labels_update(enrollment_change.last, enrollment_was, enrollment_objs)
+    labels_update(saved_change_to_enrollment.last, enrollment_before_last_save, enrollment_objs)
   end
 
   def destroy_tracking

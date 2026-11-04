@@ -1,4 +1,4 @@
-class CreateSurvey < ActiveRecord::Migration
+class CreateSurvey < ActiveRecord::Migration[4.2]
   def change
     create_table :surveys do |t|
       t.references :client, index: true, foreign_key: true

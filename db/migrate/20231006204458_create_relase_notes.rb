@@ -1,4 +1,4 @@
-class CreateRelaseNotes < ActiveRecord::Migration
+class CreateRelaseNotes < ActiveRecord::Migration[4.2]
   def change
     create_table :relase_notes do |t|
       t.text :content, null: false

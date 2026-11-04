@@ -1,4 +1,4 @@
-class ChangePreferredLanguageDefaultValue < ActiveRecord::Migration
+class ChangePreferredLanguageDefaultValue < ActiveRecord::Migration[4.2]
   def up
     change_column :clients, :preferred_language, :string, default: 'English'
   end

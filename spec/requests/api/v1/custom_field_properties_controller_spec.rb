@@ -30,7 +30,7 @@ describe Api::V1::CustomFieldPropertiesController, type: :request do
       context 'when try to create custom field properties' do
         before do
           custom_field_property_params = { format: 'json', custom_field_property: { properties: {"Text Field": "Testing" } } }
-          post "/api/v1/clients/#{client.id}/custom_field_properties?custom_field_id=#{custom_field.id}", custom_field_property_params, @auth_headers
+          post "/api/v1/clients/#{client.id}/custom_field_properties?custom_field_id=#{custom_field.id}", params: custom_field_property_params, headers: @auth_headers
         end
 
         it 'should return status 200' do
@@ -63,7 +63,7 @@ describe Api::V1::CustomFieldPropertiesController, type: :request do
       context 'when try to update custom field properties' do
         before do
           custom_field_property_params = { format: 'json', custom_field_property: { properties: {"Text Field": "Updating" } } }
-          put "/api/v1/clients/#{client.id}/custom_field_properties/#{custom_field_property.id}?custom_field_id=#{custom_field.id}", custom_field_property_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/custom_field_properties/#{custom_field_property.id}?custom_field_id=#{custom_field.id}", params: custom_field_property_params, headers: @auth_headers
         end
 
         it 'should return status 200' do
@@ -95,7 +95,7 @@ describe Api::V1::CustomFieldPropertiesController, type: :request do
 
       context 'when try to delete custom field properties' do
         before do
-          delete "/api/v1/clients/#{client.id}/custom_field_properties/#{custom_field_property.id}?custom_field_id=#{custom_field.id}", @auth_headers
+          delete "/api/v1/clients/#{client.id}/custom_field_properties/#{custom_field_property.id}?custom_field_id=#{custom_field.id}", params: @auth_headers
         end
 
         it 'should return status 204' do
@@ -109,7 +109,7 @@ describe Api::V1::CustomFieldPropertiesController, type: :request do
 
       context 'when try to delete attachment' do
         before do
-          delete "/api/v1/clients/#{client.id}/custom_field_properties/#{second_custom_field_property.id}?custom_field_id=#{custom_field.id}&file_index=0", @auth_headers
+          delete "/api/v1/clients/#{client.id}/custom_field_properties/#{second_custom_field_property.id}?custom_field_id=#{custom_field.id}&file_index=0", params: @auth_headers
         end
 
         it 'should return status 204' do

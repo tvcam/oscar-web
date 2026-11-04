@@ -31,7 +31,7 @@ xdescribe Api::V1::CallsController, type: :request do
                     }
           }
 
-          post "/api/v1/calls", call_params, @auth_headers
+          post "/api/v1/calls", params: call_params, headers: @auth_headers
         end
 
         it 'should return status 200' do
@@ -50,7 +50,7 @@ xdescribe Api::V1::CallsController, type: :request do
             call: { phone_call_id: phone_call_id }
           }
 
-          post "/api/v1/calls", call_params, @auth_headers
+          post "/api/v1/calls", params: call_params, headers: @auth_headers
         end
 
         it 'should be return status 422' do

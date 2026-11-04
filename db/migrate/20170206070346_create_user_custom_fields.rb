@@ -1,4 +1,4 @@
-class CreateUserCustomFields < ActiveRecord::Migration
+class CreateUserCustomFields < ActiveRecord::Migration[4.2]
   def change
     create_table :user_custom_fields do |t|
       t.text :properties

@@ -1,4 +1,4 @@
-class AddPassportToClients < ActiveRecord::Migration
+class AddPassportToClients < ActiveRecord::Migration[4.2]
   FIELDS = [
     :national_id_number,
     :passport_number

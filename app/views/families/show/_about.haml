@@ -26,7 +26,7 @@
         = t('families.show.donor')
       %td
         %strong
-          - @family.donors.distinct.each do|donor|
+          - @family.donors.to_a.uniq.each do|donor|
             %strong.label.label-default.donor
               = donor.name
     - if policy(@family).show?(:dependable_income)

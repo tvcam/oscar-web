@@ -1,4 +1,4 @@
-class AddFieldToReferrals < ActiveRecord::Migration
+class AddFieldToReferrals < ActiveRecord::Migration[4.2]
   def up
     add_column :referrals, :referral_status, :string, default: 'Referred' unless column_exists? :referrals, :referral_status
   end

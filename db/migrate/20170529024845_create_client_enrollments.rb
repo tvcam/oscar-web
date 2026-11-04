@@ -1,4 +1,4 @@
-class CreateClientEnrollments < ActiveRecord::Migration
+class CreateClientEnrollments < ActiveRecord::Migration[4.2]
   def change
     create_table :client_enrollments do |t|
       t.jsonb :properties

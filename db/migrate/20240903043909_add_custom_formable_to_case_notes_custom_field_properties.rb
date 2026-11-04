@@ -1,4 +1,4 @@
-class AddCustomFormableToCaseNotesCustomFieldProperties < ActiveRecord::Migration
+class AddCustomFormableToCaseNotesCustomFieldProperties < ActiveRecord::Migration[4.2]
   def change
     add_column :case_notes_custom_field_properties, :custom_formable_id, :integer
     add_column :case_notes_custom_field_properties, :custom_formable_type, :string

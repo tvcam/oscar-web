@@ -1,4 +1,4 @@
-class UpdateData < ActiveRecord::Migration
+class UpdateData < ActiveRecord::Migration[4.2]
   def up
     return if Apartment::Tenant.current_tenant == 'shared'
 

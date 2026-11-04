@@ -1,4 +1,4 @@
-class UpdateOrganizationNameInCustomField < ActiveRecord::Migration
+class UpdateOrganizationNameInCustomField < ActiveRecord::Migration[4.2]
   def change
     unprocessable_custom_fields = []
 

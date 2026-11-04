@@ -1,4 +1,4 @@
-class AddOrganizationNameToUsageReports < ActiveRecord::Migration
+class AddOrganizationNameToUsageReports < ActiveRecord::Migration[4.2]
   def change
     add_column :usage_reports, :organization_name, :string
     add_column :usage_reports, :organization_short_name, :string

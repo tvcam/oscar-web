@@ -1,4 +1,4 @@
-class AddFieldCarePlanDateToCarePlans < ActiveRecord::Migration
+class AddFieldCarePlanDateToCarePlans < ActiveRecord::Migration[4.2]
   def change
     add_column :care_plans, :care_plan_date, :date
     add_index :care_plans, :care_plan_date

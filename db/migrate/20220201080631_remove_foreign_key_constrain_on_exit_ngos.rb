@@ -1,4 +1,4 @@
-class RemoveForeignKeyConstrainOnExitNgos < ActiveRecord::Migration
+class RemoveForeignKeyConstrainOnExitNgos < ActiveRecord::Migration[4.2]
   def up
     execute <<-SQL.squish
       ALTER TABLE exit_ngos

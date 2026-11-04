@@ -1,4 +1,4 @@
-class MoveManagerIdToManagerIds < ActiveRecord::Migration
+class MoveManagerIdToManagerIds < ActiveRecord::Migration[4.2]
   def up
     unprocessable_users = []
 

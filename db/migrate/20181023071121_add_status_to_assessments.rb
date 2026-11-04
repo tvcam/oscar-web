@@ -1,4 +1,4 @@
-class AddStatusToAssessments < ActiveRecord::Migration
+class AddStatusToAssessments < ActiveRecord::Migration[4.2]
   def up
     add_column :assessments, :completed, :boolean, default: false
 

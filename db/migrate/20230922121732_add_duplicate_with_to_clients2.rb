@@ -1,4 +1,4 @@
-class AddDuplicateWithToClients2 < ActiveRecord::Migration
+class AddDuplicateWithToClients2 < ActiveRecord::Migration[4.2]
   def change
     remove_column :clients, :duplicate, :boolean, default: false if column_exists?(:clients, :duplicate)
     remove_column :clients, :duplicate_with, :jsonb, default: {} if column_exists?(:clients, :duplicate_with)

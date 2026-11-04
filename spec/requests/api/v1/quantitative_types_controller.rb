@@ -18,7 +18,7 @@ RSpec.describe Api::V1::QuantitativeTypesController, type: :request do
     context 'when user loged in' do
       before do
         sign_in(user)
-        get '/api/v1/quantitative_types', @auth_headers
+        get '/api/v1/quantitative_types', params: @auth_headers
       end
 
       it 'should be return status 200' do

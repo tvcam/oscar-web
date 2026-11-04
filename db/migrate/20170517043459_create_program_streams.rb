@@ -1,4 +1,4 @@
-class CreateProgramStreams < ActiveRecord::Migration
+class CreateProgramStreams < ActiveRecord::Migration[4.2]
   def change
     create_table :program_streams do |t|
       t.string :name

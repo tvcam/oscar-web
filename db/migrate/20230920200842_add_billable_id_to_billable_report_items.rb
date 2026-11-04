@@ -1,4 +1,4 @@
-class AddBillableIdToBillableReportItems < ActiveRecord::Migration
+class AddBillableIdToBillableReportItems < ActiveRecord::Migration[4.2]
   def change
     add_column :billable_report_items, :billable_id, :integer
   end

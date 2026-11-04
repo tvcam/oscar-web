@@ -1,4 +1,4 @@
-class AddFamilyIdToAssessments < ActiveRecord::Migration
+class AddFamilyIdToAssessments < ActiveRecord::Migration[4.2]
   def change
     add_column :assessments, :family_id, :integer
     add_index :assessments, :family_id

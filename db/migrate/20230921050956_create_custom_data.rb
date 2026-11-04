@@ -1,4 +1,4 @@
-class CreateCustomData < ActiveRecord::Migration
+class CreateCustomData < ActiveRecord::Migration[4.2]
   def change
     create_table :custom_data do |t|
       t.jsonb :fields, default: {}

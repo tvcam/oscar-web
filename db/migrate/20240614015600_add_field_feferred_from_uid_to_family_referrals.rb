@@ -1,4 +1,4 @@
-class AddFieldFeferredFromUidToFamilyReferrals < ActiveRecord::Migration
+class AddFieldFeferredFromUidToFamilyReferrals < ActiveRecord::Migration[4.2]
   def change
     add_column :family_referrals, :referral_status, :string, limit: 15, default: 'Referred'
     add_column :family_referrals, :referred_from_uid, :integer

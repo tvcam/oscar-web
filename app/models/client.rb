@@ -119,9 +119,9 @@ class Client < ActiveRecord::Base
   accepts_nested_attributes_for :family_member, allow_destroy: true
   accepts_nested_attributes_for :mo_savy_officials, allow_destroy: true, reject_if: :all_blank
 
-  has_many :families, through: :cases
   has_many :family_members, dependent: :destroy
   has_many :cases, dependent: :destroy
+  has_many :families, through: :cases
   has_many :case_notes, dependent: :delete_all
   has_many :assessments, dependent: :destroy
   has_many :default_most_recents_assessments, -> { defaults.most_recents }, class_name: 'Assessment'
@@ -137,7 +137,7 @@ class Client < ActiveRecord::Base
 
   has_paper_trail
 
-  validates :kid_id, uniqueness: { case_sensitive: false }, if: 'kid_id.present?'
+  validates :kid_id, uniqueness: { case_sensitive: false }, if: -> { kid_id.present? }
   validates :user_ids, presence: true, on: :create
   validates :user_ids, presence: true, on: :update, unless: :exit_ngo?
   validates :initial_referral_date, :received_by_id, :gender, :referral_source_category_id, presence: true
@@ -167,7 +167,7 @@ class Client < ActiveRecord::Base
   after_commit :delete_referee, on: :destroy
   after_save :enqueue_flush_cache_job
   after_commit :update_first_referral_status, on: :update
-  after_save :administrative_changes, on: :update, if: -> { initial_referral_date_changed? || received_by_id_changed? || followed_up_by_id_changed? || follow_up_date_changed? || users.any?(&:changed?) }
+  after_save :administrative_changes, on: :update, if: -> { saved_change_to_initial_referral_date? || saved_change_to_received_by_id? || saved_change_to_followed_up_by_id? || saved_change_to_follow_up_date? || users.any?(&:changed?) }
 
   scope :given_name_like, -> (value) { where('clients.given_name iLIKE :value OR clients.local_given_name iLIKE :value', { value: "%#{value.squish}%" }) }
   scope :family_name_like, -> (value) { where('clients.family_name iLIKE :value OR clients.local_family_name iLIKE :value', { value: "%#{value.squish}%" }) }

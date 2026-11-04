@@ -1,4 +1,4 @@
-class IndexForeignKeysInGlobalIdentityTmp < ActiveRecord::Migration
+class IndexForeignKeysInGlobalIdentityTmp < ActiveRecord::Migration[4.2]
   def change
   end
 end

@@ -1,4 +1,4 @@
-class CreateBillableReportItems < ActiveRecord::Migration
+class CreateBillableReportItems < ActiveRecord::Migration[4.2]
   def change
     create_table :billable_report_items do |t|
       t.references :billable_report, index: true, foreign_key: true

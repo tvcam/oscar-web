@@ -1,4 +1,4 @@
-class AddOnboardingToOrganizations < ActiveRecord::Migration
+class AddOnboardingToOrganizations < ActiveRecord::Migration[4.2]
   def change
     add_column :organizations, :onboarding_status, :string, default: 'pending'
 

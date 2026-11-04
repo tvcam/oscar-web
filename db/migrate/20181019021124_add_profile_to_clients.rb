@@ -1,4 +1,4 @@
-class AddProfileToClients < ActiveRecord::Migration
+class AddProfileToClients < ActiveRecord::Migration[4.2]
   def change
     add_column :clients, :profile, :string
   end

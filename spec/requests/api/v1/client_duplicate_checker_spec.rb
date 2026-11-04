@@ -57,7 +57,7 @@ describe Api::V1::ClientsController, type: :request do
                         global_id: global_identity.ulid
                       }
                     }
-          post "/api/v1/clients", client, @auth_headers
+          post "/api/v1/clients", params: client, headers: @auth_headers
         end
 
         it 'should return status 200' do

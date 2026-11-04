@@ -1,4 +1,4 @@
-class AddFormGroup1ToFieldSettings < ActiveRecord::Migration
+class AddFormGroup1ToFieldSettings < ActiveRecord::Migration[4.2]
   def change
     add_column :field_settings, :form_group_1, :string
     add_column :field_settings, :form_group_2, :string

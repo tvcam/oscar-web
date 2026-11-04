@@ -1,4 +1,4 @@
-class CreateCaseNotesCustomFieldProperties < ActiveRecord::Migration
+class CreateCaseNotesCustomFieldProperties < ActiveRecord::Migration[4.2]
   def change
     create_table :case_notes_custom_field_properties do |t|
       t.references :case_note, index: true, foreign_key: true

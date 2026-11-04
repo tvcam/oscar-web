@@ -1,4 +1,4 @@
-class AddUniqFielsToDomains < ActiveRecord::Migration
+class AddUniqFielsToDomains < ActiveRecord::Migration[4.2]
   def change
     if schema_search_path =~ /^\"isf\"/
       reversible do |dir|

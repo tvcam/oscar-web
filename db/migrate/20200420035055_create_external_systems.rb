@@ -1,4 +1,4 @@
-class CreateExternalSystems < ActiveRecord::Migration
+class CreateExternalSystems < ActiveRecord::Migration[4.2]
   def change
     create_table :external_systems do |t|
       t.string :name

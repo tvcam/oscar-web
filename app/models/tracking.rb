@@ -63,10 +63,10 @@ class Tracking < ActiveRecord::Base
   end
 
   def auto_update_trackings
-    return unless self.fields_changed?
+    return unless saved_change_to_fields?
 
     enrollment_tracking_objs = self.program_stream.attached_to_client? ? self.client_enrollment_trackings : self.enrollment_trackings
-    labels_update(self.fields_change.last, self.fields_was, enrollment_tracking_objs)
+    labels_update(saved_change_to_fields.last, fields_before_last_save, enrollment_tracking_objs)
   end
 
   def flush_cache

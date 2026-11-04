@@ -189,7 +189,7 @@
                   = t('.case_worker_or_staff')
                 %td
                   %strong
-                    - @family.case_workers.distinct.sort.each do |case_worker|
+                    - @family.case_workers.to_a.uniq.sort.each do |case_worker|
                       %strong.label.label-default
                         = user case_worker
               %tr

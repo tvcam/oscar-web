@@ -1,4 +1,4 @@
-class CreateFamilyMembers < ActiveRecord::Migration
+class CreateFamilyMembers < ActiveRecord::Migration[4.2]
   def change
     create_table :family_members do |t|
       t.string :adult_name, default: ''

@@ -1,4 +1,4 @@
-class UseJsonbForObjectChanges < ActiveRecord::Migration
+class UseJsonbForObjectChanges < ActiveRecord::Migration[4.2]
   def change
     rename_column :versions, :object, :old_object
     rename_column :versions, :object_changes, :old_object_changes

@@ -1,4 +1,4 @@
-class AddReportFieldsToUsageReports < ActiveRecord::Migration
+class AddReportFieldsToUsageReports < ActiveRecord::Migration[4.2]
   def change
     add_column :usage_reports, :added_cases, :jsonb, default: {}
     add_column :usage_reports, :synced_cases, :jsonb, default: {}

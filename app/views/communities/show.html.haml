@@ -177,7 +177,7 @@
               = t('activerecord.attributes.community.case_worker_ids')
             %td
               %strong
-                - @community.case_workers.distinct.sort.each do |case_worker|
+                - @community.case_workers.to_a.uniq.sort.each do |case_worker|
                   %strong.label.label-default
                     = user case_worker
           %tr
@@ -197,7 +197,7 @@
               = t('activerecord.attributes.community.donor_ids')
             %td
               %strong
-                - @community.donors.distinct.each do|donor|
+                - @community.donors.to_a.uniq.each do|donor|
                   %strong.label.label-default.donor
                     = donor.name
           - if @community.documents.any?

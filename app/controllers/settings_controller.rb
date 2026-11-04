@@ -1,5 +1,4 @@
 class SettingsController < AdminController
-  rescue_from ActionController::RedirectBackError, with: :redirect_to_default
   include CommunityHelper
 
   before_action :find_setting, except: [:create]
@@ -33,7 +32,7 @@ class SettingsController < AdminController
   def update
     if params[:setting].key?(:org_form)
       if @setting.update_attributes(setting_params)
-        redirect_back fallback_location: root_path, notice: t('.successfully_updated')
+        redirect_back fallback_location: settings_path, notice: t('.successfully_updated')
       else
         render :edit
       end
@@ -41,7 +40,7 @@ class SettingsController < AdminController
       respond_to do |f|
         f.html do
           if @setting.update_attributes(setting_params)
-            redirect_back fallback_location: root_path, notice: t('.successfully_updated')
+            redirect_back fallback_location: settings_path, notice: t('.successfully_updated')
           else
             flash[:alert] = @setting.errors.full_messages.join(', ')
             render :index
@@ -110,7 +109,7 @@ class SettingsController < AdminController
     return unless request.put?
 
     if @setting.update_attributes(setting_params)
-      redirect_back fallback_location: root_path, notice: t('.successfully_updated')
+      redirect_back fallback_location: settings_path, notice: t('.successfully_updated')
     else
       render :header_count
     end
@@ -139,7 +138,7 @@ class SettingsController < AdminController
     end
 
     if attribute && @setting.update_attributes(selected_domain_param || setting_params)
-      redirect_back fallback_location: root_path, notice: t('successfully_updated', klass: t('settings.update.successfully_updated'))
+      redirect_back fallback_location: settings_path, notice: t('successfully_updated', klass: t('settings.update.successfully_updated'))
     else
       flash[:alert] = @setting.errors.full_messages.join(', ') if @setting.errors.full_messages.any?
       render :risk_assessment
@@ -147,10 +146,6 @@ class SettingsController < AdminController
   end
 
   private
-
-  def redirect_to_default
-    redirect_to settings_path
-  end
 
   def country_address_fields
     @provinces = Province.cached_order_name

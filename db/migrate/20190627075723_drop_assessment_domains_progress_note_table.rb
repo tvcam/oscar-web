@@ -1,4 +1,4 @@
-class DropAssessmentDomainsProgressNoteTable < ActiveRecord::Migration
+class DropAssessmentDomainsProgressNoteTable < ActiveRecord::Migration[4.2]
   def up
     drop_table :assessment_domains_progress_notes
   end

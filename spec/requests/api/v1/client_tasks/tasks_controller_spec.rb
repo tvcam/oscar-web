@@ -28,7 +28,7 @@ describe Api::V1::ClientTasks::TasksController, type: :request do
       context 'when try to create task' do
         before do
           task = { format: 'json', task: { user_ids: client.user_ids, domain_id: domains.sample.id, name: FFaker::Lorem.paragraph, completion_date: 1.month.from_now} }
-          post "/api/v1/clients/#{client.id}/tasks", task, @auth_headers
+          post "/api/v1/clients/#{client.id}/tasks", params: task, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -39,7 +39,7 @@ describe Api::V1::ClientTasks::TasksController, type: :request do
       context 'when try to create task without domain' do
         before do
           task = { format: 'json', task: { user_ids: client.user_ids, name: FFaker::Lorem.paragraph, completion_date: 1.month.from_now}  }
-          post "/api/v1/clients/#{client.id}/tasks", task, @auth_headers
+          post "/api/v1/clients/#{client.id}/tasks", params: task, headers: @auth_headers
         end
 
         it 'should be return status 422' do
@@ -72,7 +72,7 @@ describe Api::V1::ClientTasks::TasksController, type: :request do
       context 'when try to update task' do
         before do
           task_params = { format: 'json', task: { user_ids: client.user_ids, completion_date: 1.month.from_now} }
-          put "/api/v1/clients/#{client.id}/tasks/#{task.id}", task_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/tasks/#{task.id}", params: task_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -100,7 +100,7 @@ describe Api::V1::ClientTasks::TasksController, type: :request do
 
       context 'when try to delete task' do
         before do
-          delete "/api/v1/clients/#{client.id}/tasks/#{task.id}", @auth_headers
+          delete "/api/v1/clients/#{client.id}/tasks/#{task.id}", params: @auth_headers
         end
 
         it 'should be return status 204' do

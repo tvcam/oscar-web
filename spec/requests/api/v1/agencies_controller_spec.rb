@@ -18,7 +18,7 @@ describe Api::V1::AgenciesController, type: :request do
     context 'when user loged in' do
       before do
         sign_in(user)
-        get '/api/v1/agencies', @auth_headers
+        get '/api/v1/agencies', params: @auth_headers
       end
 
       it 'should be return status 200' do

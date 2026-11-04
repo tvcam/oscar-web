@@ -1,4 +1,4 @@
-class CreateMtpReadOnlyDatabaseUser < ActiveRecord::Migration
+class CreateMtpReadOnlyDatabaseUser < ActiveRecord::Migration[4.2]
   def change
     if schema_exists?('mtp')
       reversible do |dir|

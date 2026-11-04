@@ -1,4 +1,4 @@
-class RemoveForeignKeyFromUsageReport < ActiveRecord::Migration
+class RemoveForeignKeyFromUsageReport < ActiveRecord::Migration[4.2]
   def change
     remove_foreign_key :usage_reports, :organizations
   end

@@ -1,4 +1,4 @@
-class AddStackHolderDataToFieldSettings < ActiveRecord::Migration
+class AddStackHolderDataToFieldSettings < ActiveRecord::Migration[4.2]
   FIELDS = [
     :stakeholder_contacts,
     :neighbor_name,

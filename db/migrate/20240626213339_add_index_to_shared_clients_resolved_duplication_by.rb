@@ -1,4 +1,4 @@
-class AddIndexToSharedClientsResolvedDuplicationBy < ActiveRecord::Migration
+class AddIndexToSharedClientsResolvedDuplicationBy < ActiveRecord::Migration[4.2]
   def change
     add_index :shared_clients, :resolved_duplication_by if column_exists?(:shared_clients, :resolved_duplication_by)
     add_index :shared_clients, :resolved_duplication_at if column_exists?(:shared_clients, :resolved_duplication_at)

@@ -1,4 +1,4 @@
-class CreateGovernmentForm < ActiveRecord::Migration
+class CreateGovernmentForm < ActiveRecord::Migration[4.2]
   def change
     create_table :government_forms do |t|
       t.string :name, default: ''
