@@ -6,10 +6,10 @@ PaperTrail::Rails::Engine.eager_load!
 
 if defined?(::Rails::Console)
   # PaperTrail.whodunnit = "#{`whoami`.strip}: console"
-  PaperTrail.whodunnit = "#{`whoami`.strip}@rotati"
+  PaperTrail.request.whodunnit = "#{`whoami`.strip}@rotati"
 elsif defined?(Rake) && Rake.application.name
   # PaperTrail.whodunnit = "#{`whoami`.strip}: #{File.basename($0)} #{ARGV.join ' '}"
-  PaperTrail.whodunnit = "#{`whoami`.strip}@rotati"
+  PaperTrail.request.whodunnit = "#{`whoami`.strip}@rotati"
 end
 
 PaperTrail.class_eval do
@@ -79,3 +79,14 @@ PaperTrail::Version.class_eval do
     throw(:abort)
   end
 end
+
+# PaperTrail 10 also writes object_changes for destroy events (every attribute -> nil);
+# 5.x/8.x did not. Keep the old behaviour so history views and reports are unchanged.
+module PaperTrailDestroyWithoutObjectChanges
+  private
+
+  def record_object_changes?
+    false
+  end
+end
+PaperTrail::Events::Destroy.prepend(PaperTrailDestroyWithoutObjectChanges)

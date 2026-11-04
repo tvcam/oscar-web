@@ -3,7 +3,7 @@ class OrganizationTypesController < AdminController
   before_action :find_organization_type, only: [:update, :destroy]
 
   def index
-    @organization_types = OrganizationType.order('lower(name)').page(params[:page]).per(20)
+    @organization_types = OrganizationType.order(Arel.sql('lower(name)')).page(params[:page]).per(20)
     @results   = OrganizationType.count
   end
 

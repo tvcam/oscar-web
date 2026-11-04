@@ -28,7 +28,7 @@ namespace :demo_production do
       client.save(validate: false)
     end
 
-    selected_clients = clients_without_program_stream_custom_form.order("RANDOM()").limit(20)
+    selected_clients = clients_without_program_stream_custom_form.order(Arel.sql("RANDOM()")).limit(20)
     to_delete_clients = Client.where.not(id: selected_clients.ids)
     ClientEnrollment.all.each do |ce|
       ce.leave_program.delete if ce.leave_program.present?

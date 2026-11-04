@@ -37,7 +37,7 @@ module CaseNoteHelper
         end
       end
     elsif case_notes_editable? && (policy(obj).create? || policy(CaseNote).create?)
-      link_to new_polymorphic_path([obj, 'case_note'], custom: false) do
+      link_to new_polymorphic_path([obj, :case_note], custom: false) do
         @current_setting.default_assessment
       end
     else
@@ -77,7 +77,7 @@ module CaseNoteHelper
         end
       end
     elsif case_notes_editable? && policy(obj).create?
-      link_to new_polymorphic_path([obj, 'case_note'], custom: true, custom_name: custom_assessment_name) do
+      link_to new_polymorphic_path([obj, :case_note], custom: true, custom_name: custom_assessment_name) do
         custom_assessment_name
       end
     else
