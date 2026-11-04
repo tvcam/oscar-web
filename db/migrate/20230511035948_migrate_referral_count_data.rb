@@ -1,4 +1,4 @@
-class MigrateReferralCountData < ActiveRecord::Migration
+class MigrateReferralCountData < ActiveRecord::Migration[4.2]
   def change
     Client.update_all(referral_count: 0)
 

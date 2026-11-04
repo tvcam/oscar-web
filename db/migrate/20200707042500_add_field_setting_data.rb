@@ -1,4 +1,4 @@
-class AddFieldSettingData < ActiveRecord::Migration
+class AddFieldSettingData < ActiveRecord::Migration[4.2]
   NEW_FIELDS = {
     marital_status: {
       label: 'Marital Status'

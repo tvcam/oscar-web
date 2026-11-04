@@ -1,4 +1,4 @@
-class AddGradeToClient < ActiveRecord::Migration
+class AddGradeToClient < ActiveRecord::Migration[4.2]
  
   def change
 

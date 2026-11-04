@@ -62,3 +62,4 @@ config/jenkins
 /*.csv
 /*.xls
 /*.xlsx
+.gstack/

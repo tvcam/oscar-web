@@ -1,4 +1,4 @@
-class CreateQuantitativeTypes < ActiveRecord::Migration
+class CreateQuantitativeTypes < ActiveRecord::Migration[4.2]
   def change
     create_table :quantitative_types do |t|
       t.string :name, default: ''

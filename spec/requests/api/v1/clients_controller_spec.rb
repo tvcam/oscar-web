@@ -34,7 +34,7 @@ describe Api::V1::ClientsController, type: :request do
     xcontext 'when user loged in' do
       before do
         sign_in(user)
-        get "/api/v1/clients/#{clients[0].id}", @auth_headers
+        get "/api/v1/clients/#{clients[0].id}", params: @auth_headers
       end
 
       it 'should return status 200' do
@@ -83,7 +83,7 @@ describe Api::V1::ClientsController, type: :request do
                         global_id: global_identity.ulid
                       }
                     }
-          post "/api/v1/clients", client, @auth_headers
+          post "/api/v1/clients", params: client, headers: @auth_headers
         end
 
         it 'should return status 200' do
@@ -117,7 +117,7 @@ describe Api::V1::ClientsController, type: :request do
         let!(:given_name) { FFaker::Name.name }
         before do
           client = { format: 'json', client: { given_name: given_name } }
-          put "/api/v1/clients/#{clients[0].id}", client, @auth_headers
+          put "/api/v1/clients/#{clients[0].id}", params: client, headers: @auth_headers
         end
 
         it 'should return status 200' do
@@ -149,7 +149,7 @@ describe Api::V1::ClientsController, type: :request do
 
       context 'when try to delete client' do
         before do
-          delete "/api/v1/clients/#{clients[0].id}", @auth_headers
+          delete "/api/v1/clients/#{clients[0].id}", params: @auth_headers
         end
 
         it 'should return status 204' do

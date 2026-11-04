@@ -1,4 +1,4 @@
-class AddBillableReportIdToPaperTrailVersions < ActiveRecord::Migration
+class AddBillableReportIdToPaperTrailVersions < ActiveRecord::Migration[4.2]
   def change
     add_column :versions, :billable_report_id, :integer
     add_column :versions, :billable_status, :string

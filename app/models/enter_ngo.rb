@@ -63,7 +63,7 @@ class EnterNgo < ActiveRecord::Base
   end
 
   def flash_cache
-    Rails.cache.delete(['dashboard', "#{Apartment::Tenant.current}_client_errors"]) if accepted_date_changed?
+    Rails.cache.delete(['dashboard', "#{Apartment::Tenant.current}_client_errors"]) if saved_change_to_accepted_date?
 
     user_id = User.current_user.id
     return unless user_id

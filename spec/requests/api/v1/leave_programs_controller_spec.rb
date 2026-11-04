@@ -34,7 +34,7 @@ describe Api::V1::LeaveProgramsController, type: :request do
 
       xcontext 'when try create leave_program with valid value' do
         before do
-          post "#{leave_programs_path}?program_stream_id=#{program_stream.id}", valid_params, @auth_headers
+          post "#{leave_programs_path}?program_stream_id=#{program_stream.id}", params: valid_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -48,7 +48,7 @@ describe Api::V1::LeaveProgramsController, type: :request do
 
       context 'when try create leave_program with invalid value' do
         before do
-          post "#{leave_programs_path}?program_stream_id=#{program_stream.id}", invalid_params, @auth_headers
+          post "#{leave_programs_path}?program_stream_id=#{program_stream.id}", params: invalid_params, headers: @auth_headers
         end
 
         it 'should be return status 422' do
@@ -83,7 +83,7 @@ describe Api::V1::LeaveProgramsController, type: :request do
 
       context 'when try update leave_program' do
         before do
-          put "#{leave_programs_path}/#{leave_program.id}?program_stream_id=#{program_stream.id}", valid_updated_params, @auth_headers
+          put "#{leave_programs_path}/#{leave_program.id}?program_stream_id=#{program_stream.id}", params: valid_updated_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -97,7 +97,7 @@ describe Api::V1::LeaveProgramsController, type: :request do
 
       context 'when try update leave_program with invalid value' do
         before do
-          put "#{leave_programs_path}/#{leave_program.id}?program_stream_id=#{program_stream.id}", invalid_updated_params, @auth_headers
+          put "#{leave_programs_path}/#{leave_program.id}?program_stream_id=#{program_stream.id}", params: invalid_updated_params, headers: @auth_headers
         end
 
         it 'should be return status 422' do

@@ -1,4 +1,4 @@
-class AddSubdistrictIdToFamilies < ActiveRecord::Migration
+class AddSubdistrictIdToFamilies < ActiveRecord::Migration[4.2]
   def change
     add_column :families, :subdistrict_id, :integer
     add_index :families, :subdistrict_id

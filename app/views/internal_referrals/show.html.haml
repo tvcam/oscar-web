@@ -28,7 +28,7 @@
           %p
             %b= "#{t('.program_stream_ids')}:"
             %ul
-              - @internal_referral.program_streams.distinct.each do |program|
+              - @internal_referral.program_streams.to_a.uniq.each do |program|
                 %li= program.name
           %p
             %b= "#{t('.client_representing_problem')}:"

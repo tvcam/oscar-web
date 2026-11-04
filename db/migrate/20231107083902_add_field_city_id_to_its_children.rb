@@ -1,4 +1,4 @@
-class AddFieldCityIdToItsChildren < ActiveRecord::Migration
+class AddFieldCityIdToItsChildren < ActiveRecord::Migration[4.2]
   def change
     add_column :clients, :city_id, :integer
     add_index :clients, :city_id

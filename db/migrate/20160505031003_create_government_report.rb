@@ -1,4 +1,4 @@
-class CreateGovernmentReport < ActiveRecord::Migration
+class CreateGovernmentReport < ActiveRecord::Migration[4.2]
   def change
     create_table :government_reports do |t|
     	t.string  :code, 													default: ''

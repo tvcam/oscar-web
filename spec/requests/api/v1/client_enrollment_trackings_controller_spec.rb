@@ -34,7 +34,7 @@ describe Api::V1::ClientEnrollmentTrackingsController, type: :request do
 
       xcontext 'when try create client enrollment tracking with valid value' do
         before do
-          post "#{client_enrollment_trackings_path}?tracking_id=#{tracking.id}", valid_params, @auth_headers
+          post "#{client_enrollment_trackings_path}?tracking_id=#{tracking.id}", params: valid_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -48,7 +48,7 @@ describe Api::V1::ClientEnrollmentTrackingsController, type: :request do
 
       context 'when try create client enrollment tracking with invalid value' do
         before do
-          post "#{client_enrollment_trackings_path}?tracking_id=#{tracking.id}", invalid_params, @auth_headers
+          post "#{client_enrollment_trackings_path}?tracking_id=#{tracking.id}", params: invalid_params, headers: @auth_headers
         end
 
         it 'should be return status 422' do
@@ -83,7 +83,7 @@ describe Api::V1::ClientEnrollmentTrackingsController, type: :request do
 
       context 'when try update client enrollment tracking' do
         before do
-          put "#{client_enrollment_trackings_path}/#{client_enrollment_tracking.id}?tracking_id=#{tracking.id}", valid_updated_params, @auth_headers
+          put "#{client_enrollment_trackings_path}/#{client_enrollment_tracking.id}?tracking_id=#{tracking.id}", params: valid_updated_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -97,7 +97,7 @@ describe Api::V1::ClientEnrollmentTrackingsController, type: :request do
 
       context 'when try update client enrollment tracking with invalid value' do
         before do
-          put "#{client_enrollment_trackings_path}/#{client_enrollment_tracking.id}?tracking_id=#{tracking.id}", invalid_updated_params, @auth_headers
+          put "#{client_enrollment_trackings_path}/#{client_enrollment_tracking.id}?tracking_id=#{tracking.id}", params: invalid_updated_params, headers: @auth_headers
         end
 
         it 'should be return status 422' do

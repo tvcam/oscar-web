@@ -1,4 +1,4 @@
-class CreatePartnerCustomFields < ActiveRecord::Migration
+class CreatePartnerCustomFields < ActiveRecord::Migration[4.2]
   def change
     create_table :partner_custom_fields do |t|
       t.text :properties

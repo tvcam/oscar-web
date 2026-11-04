@@ -1,4 +1,4 @@
-class CreateUsageReports < ActiveRecord::Migration
+class CreateUsageReports < ActiveRecord::Migration[4.2]
   def change
     create_table :usage_reports do |t|
       t.references :organization, index: true, foreign_key: true

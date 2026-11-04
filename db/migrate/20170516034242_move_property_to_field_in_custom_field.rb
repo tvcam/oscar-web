@@ -1,4 +1,4 @@
-class MovePropertyToFieldInCustomField < ActiveRecord::Migration
+class MovePropertyToFieldInCustomField < ActiveRecord::Migration[4.2]
   def change
     puts '==========Processing=========='
 

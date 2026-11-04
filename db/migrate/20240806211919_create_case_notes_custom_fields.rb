@@ -1,4 +1,4 @@
-class CreateCaseNotesCustomFields < ActiveRecord::Migration
+class CreateCaseNotesCustomFields < ActiveRecord::Migration[4.2]
   def change
     create_table :case_notes_custom_fields do |t|
       t.datetime :deleted_at

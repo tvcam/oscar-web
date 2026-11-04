@@ -1,4 +1,4 @@
-class CreateNecessities < ActiveRecord::Migration
+class CreateNecessities < ActiveRecord::Migration[4.2]
   def change
     create_table :necessities do |t|
       t.string :content, default: ''

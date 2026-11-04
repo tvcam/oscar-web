@@ -1,4 +1,4 @@
-class AddedFieldHasDisabilityToClients < ActiveRecord::Migration
+class AddedFieldHasDisabilityToClients < ActiveRecord::Migration[4.2]
   def change
     add_column :clients, :has_disability, :boolean, default: false
     add_column :clients, :disability_specification, :string

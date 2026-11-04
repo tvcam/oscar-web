@@ -1,4 +1,4 @@
-class CreateCommunityMembers < ActiveRecord::Migration
+class CreateCommunityMembers < ActiveRecord::Migration[4.2]
   def change
     create_table :community_members do |t|
       t.string   "name",                              default: ""

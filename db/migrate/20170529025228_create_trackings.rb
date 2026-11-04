@@ -1,4 +1,4 @@
-class CreateTrackings < ActiveRecord::Migration
+class CreateTrackings < ActiveRecord::Migration[4.2]
   def change
     create_table :trackings do |t|
       t.jsonb :properties

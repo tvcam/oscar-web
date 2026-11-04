@@ -30,7 +30,7 @@ describe Api::V1::ClientEnrollmentsController do
 
       xcontext 'when try create client enrollment with valid value' do
         before do
-          post "/api/v1/clients/#{client.id}/client_enrollments?program_stream_id=#{program_stream.id}", valid_params, @auth_headers
+          post "/api/v1/clients/#{client.id}/client_enrollments?program_stream_id=#{program_stream.id}", params: valid_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -44,7 +44,7 @@ describe Api::V1::ClientEnrollmentsController do
 
       context 'when try create client enrollment with invalid value' do
         before do
-          post "/api/v1/clients/#{client.id}/client_enrollments?program_stream_id=#{program_stream.id}", invalid_params, @auth_headers
+          post "/api/v1/clients/#{client.id}/client_enrollments?program_stream_id=#{program_stream.id}", params: invalid_params, headers: @auth_headers
         end
 
         it 'should be return status 422' do
@@ -79,7 +79,7 @@ describe Api::V1::ClientEnrollmentsController do
 
       context 'when try update client enrollment' do
         before do
-          put "/api/v1/clients/#{client.id}/client_enrollments/#{client_enrollment.id}?program_stream_id=#{program_stream.id}", valid_updated_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/client_enrollments/#{client_enrollment.id}?program_stream_id=#{program_stream.id}", params: valid_updated_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -93,7 +93,7 @@ describe Api::V1::ClientEnrollmentsController do
 
       context 'when try update client enrollment with invalid value' do
         before do
-          put "/api/v1/clients/#{client.id}/client_enrollments/#{client_enrollment.id}?program_stream_id=#{program_stream.id}", invalid_updated_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/client_enrollments/#{client_enrollment.id}?program_stream_id=#{program_stream.id}", params: invalid_updated_params, headers: @auth_headers
         end
 
         it 'should be return status 422' do

@@ -4,7 +4,7 @@ class ClientBooksController < AdminController
   before_action :find_client
 
   def index
-    @calls = @client.calls.distinct
+    @calls = @client.calls.to_a.uniq
     @case_notes = @client.case_notes.most_recents.includes(:domain_groups, custom_field_property: :custom_field)
     @assessments = AssessmentDecorator.decorate_collection(@client.assessments.includes(:care_plan, :custom_assessment_setting).order(created_at: :desc))
     @client_enrollments = program_stream_order_by_enrollment[:enrollments].compact

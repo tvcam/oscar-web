@@ -93,7 +93,7 @@ module ClientsHelper
   end
 
   def order_case_worker(client)
-    client.users.distinct.sort
+    client.users.to_a.uniq.sort
   end
 
   def partner(partner)
@@ -1041,7 +1041,7 @@ module ClientsHelper
             type_of_services = map_type_of_services(client)
             count += type_of_services.count
           elsif class_name == 'date_of_call'
-            count += client.calls.distinct.count
+            count += client.calls.to_a.uniq.count
           elsif class_name == 'indirect_beneficiaries'
             count += client.indirect_beneficiaries
           else
@@ -1423,7 +1423,7 @@ module ClientsHelper
   end
 
   def client_donors
-    @client.donors.distinct
+    @client.donors.to_a.uniq
   end
 
   def get_address_json

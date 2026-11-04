@@ -16,7 +16,7 @@ describe Api::V1::DepartmentsController do
     context 'when user logged in' do
       before do
         sign_in(user)
-        get '/api/v1/departments', @auth_headers
+        get '/api/v1/departments', params: @auth_headers
       end
 
       it 'should be return status 200' do

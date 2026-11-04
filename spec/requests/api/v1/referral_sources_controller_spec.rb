@@ -18,7 +18,7 @@ RSpec.describe Api::V1::ReferralSourcesController, type: :request do
     context 'when user loged in' do
       before do
         sign_in(user)
-        get '/api/v1/referral_sources', @auth_headers
+        get '/api/v1/referral_sources', params: @auth_headers
       end
 
       it 'should be return status 200' do

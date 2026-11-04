@@ -19,7 +19,7 @@ RSpec.describe Api::V1::ProgramStreamsController, type: :request do
     context 'when user loged in' do
       before do
         sign_in(user)
-        get '/api/v1/program_streams', @auth_headers
+        get '/api/v1/program_streams', params: @auth_headers
       end
 
       it 'should be return status 200' do

@@ -1,4 +1,4 @@
-class AddUsersCountToOrganizations < ActiveRecord::Migration
+class AddUsersCountToOrganizations < ActiveRecord::Migration[4.2]
   def change
     add_column :organizations, :users_count, :integer, default: 0
 

@@ -15,7 +15,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
     context 'when user loged in' do
       before do
         sign_in(user)
-        get '/api/v1/users', @auth_headers
+        get '/api/v1/users', params: @auth_headers
       end
 
       context 'when user try to get self and subordinates' do
@@ -40,7 +40,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
     context 'when user loged in' do
       before do
         sign_in(user)
-        get "/api/v1/users/#{user.id}", @auth_headers
+        get "/api/v1/users/#{user.id}", params: @auth_headers
       end
 
       context 'when user try to get self and subordinates' do

@@ -1,4 +1,4 @@
-class AddOrgInfoToBilableReports < ActiveRecord::Migration
+class AddOrgInfoToBilableReports < ActiveRecord::Migration[4.2]
   def change
     add_column :billable_reports, :organization_name, :string
     add_column :billable_reports, :organization_short_name, :string

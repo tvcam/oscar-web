@@ -1,4 +1,4 @@
-class CreateCaseNoteDomainGroups < ActiveRecord::Migration
+class CreateCaseNoteDomainGroups < ActiveRecord::Migration[4.2]
   def change
     create_table :case_note_domain_groups do |t|
       t.text       :note, default: ''

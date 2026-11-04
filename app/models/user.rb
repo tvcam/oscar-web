@@ -441,7 +441,7 @@ class User < ActiveRecord::Base
   private
 
   def toggle_referral_notification
-    return unless roles_changed? && roles == 'admin'
+    return unless saved_change_to_roles? && roles == 'admin'
 
     update_columns(referral_notification: true)
   end

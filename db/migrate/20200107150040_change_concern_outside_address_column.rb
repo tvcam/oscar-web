@@ -1,4 +1,4 @@
-class ChangeConcernOutsideAddressColumn < ActiveRecord::Migration
+class ChangeConcernOutsideAddressColumn < ActiveRecord::Migration[4.2]
   def up
     change_column :clients, :concern_outside_address, :string, default: ""
   end

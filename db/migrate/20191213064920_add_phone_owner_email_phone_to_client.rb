@@ -1,4 +1,4 @@
-class AddPhoneOwnerEmailPhoneToClient < ActiveRecord::Migration
+class AddPhoneOwnerEmailPhoneToClient < ActiveRecord::Migration[4.2]
   def change
     add_column :clients, :outside, :boolean, default: false
     add_column :clients, :outside_address, :string, default: ''

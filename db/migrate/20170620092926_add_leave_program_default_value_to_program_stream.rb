@@ -1,4 +1,4 @@
-class AddLeaveProgramDefaultValueToProgramStream < ActiveRecord::Migration
+class AddLeaveProgramDefaultValueToProgramStream < ActiveRecord::Migration[4.2]
   def up
     change_column :program_streams, :exit_program, :jsonb, default: {}
   end

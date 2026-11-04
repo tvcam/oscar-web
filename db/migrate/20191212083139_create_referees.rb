@@ -1,4 +1,4 @@
-class CreateReferees < ActiveRecord::Migration
+class CreateReferees < ActiveRecord::Migration[4.2]
   def change
     create_table :referees do |t|
       t.string :address_type, default: ''

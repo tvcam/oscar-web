@@ -29,7 +29,7 @@ describe Api::V1::AssessmentsController, type: :request do
       context 'when try create assessment' do
         before do
           assessment = { format: 'json', assessment: { assessment_domains_attributes: [{ domain_id: domain.id, score: score, reason: FFaker::Lorem.paragraph, goal: FFaker::Lorem.paragraph}] } }
-          post "/api/v1/clients/#{client.id}/assessments", assessment, @auth_headers
+          post "/api/v1/clients/#{client.id}/assessments", params: assessment, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -40,7 +40,7 @@ describe Api::V1::AssessmentsController, type: :request do
       context 'when try create assessment without domain' do
         before do
           assessment = { format: 'json', assessment: { assessment_domains_attributes: [{score: score, reason: FFaker::Lorem.paragraph, goal: FFaker::Lorem.paragraph}] } }
-          post "/api/v1/clients/#{client.id}/assessments", assessment, @auth_headers
+          post "/api/v1/clients/#{client.id}/assessments", params: assessment, headers: @auth_headers
         end
 
         it 'should be return status 422' do
@@ -76,7 +76,7 @@ describe Api::V1::AssessmentsController, type: :request do
       context 'when try update assessment' do
         before do
           assessment_params = { format: 'json', assessment: { assessment_domains_attributes: {'0' => { id: assessment_domains[0].id, domain_id: domain.id, score: score, reason: FFaker::Lorem.paragraph, goal: "Testing Goal"} } } }
-          put "/api/v1/clients/#{client.id}/assessments/#{assessment.id}", assessment_params, @auth_headers
+          put "/api/v1/clients/#{client.id}/assessments/#{assessment.id}", params: assessment_params, headers: @auth_headers
         end
 
         it 'should be return status 200' do
@@ -91,7 +91,7 @@ describe Api::V1::AssessmentsController, type: :request do
       context 'when try update assessment without domain' do
         before do
           assessment_params_ = { format: 'json', assessment: { assessment_domains_attributes: {'0' => {score: score, reason: FFaker::Lorem.paragraph, goal: FFaker::Lorem.paragraph} } } }
-          put "/api/v1/clients/#{client.id}/assessments/#{assessment.id}", assessment_params_, @auth_headers
+          put "/api/v1/clients/#{client.id}/assessments/#{assessment.id}", params: assessment_params_, headers: @auth_headers
         end
 
         it 'should be return status 422' do

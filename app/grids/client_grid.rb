@@ -583,11 +583,11 @@ class ClientGrid < BaseGrid
     call_fields.each do |call_field|
       column(call_field.to_sym, order: false, header: -> { I18n.t("datagrid.columns.calls.#{call_field}") }, preload: :calls, class: 'call-field') do |object|
         if call_field[/date_of_call/i]
-          object.calls.distinct.map { |call| call.send(call_field.to_sym) && call.send(call_field.to_sym).strftime('%d %B %Y') }.join('; ')
+          object.calls.to_a.uniq.map { |call| call.send(call_field.to_sym) && call.send(call_field.to_sym).strftime('%d %B %Y') }.join('; ')
         elsif call_field[/start_datetime/]
-          object.calls.distinct.map { |call| call.send(call_field.to_sym) && call.send(call_field.to_sym).strftime('%I:%M%p') }.join('; ')
+          object.calls.to_a.uniq.map { |call| call.send(call_field.to_sym) && call.send(call_field.to_sym).strftime('%I:%M%p') }.join('; ')
         elsif ['called_before', 'childsafe_agent', 'answered_call', 'requested_update', 'not_a_phone_call'].include?(call_field)
-          object.calls.distinct.map do |call|
+          object.calls.to_a.uniq.map do |call|
             value = call.send(call_field.to_sym)
             value = value.blank? || value == false ? false : value
             value = yes_no[value.to_s.to_sym]
@@ -599,7 +599,7 @@ class ClientGrid < BaseGrid
             call.send(field_name.to_sym).pluck(:content).join(', ')
           end.join(', ')
         else
-          object.calls.distinct.map { |call| call.send(call_field.to_sym) }.join(', ')
+          object.calls.to_a.uniq.map { |call| call.send(call_field.to_sym) }.join(', ')
         end
       end
     end
@@ -1037,7 +1037,7 @@ class ClientGrid < BaseGrid
 
   column(:flight_nb, order: false, header: -> { I18n.t('clients.form.flight_nb') })
   column(:ratanak_achievement_program_staff_client_ids, order: false, header: -> { I18n.t('clients.form.ratanak_achievement_program_staff_client_ids') }) do |object|
-    object.ratanak_achievement_program_staff_clients.distinct.map { |case_worker| "#{case_worker.first_name} #{case_worker.last_name}".squish }.join(', ')
+    object.ratanak_achievement_program_staff_clients.to_a.uniq.map { |case_worker| "#{case_worker.first_name} #{case_worker.last_name}".squish }.join(', ')
   end
 
   column(:mo_savy_officials, order: false, header: -> { I18n.t('clients.form.mosavy_official') }) do |object|

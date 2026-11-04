@@ -244,7 +244,7 @@ module FamiliesHelper
   end
 
   def family_order_case_worker(family)
-    family.case_workers.distinct.sort
+    family.case_workers.to_a.uniq.sort
   end
 
   def name_km_en

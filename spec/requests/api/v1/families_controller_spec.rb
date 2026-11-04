@@ -18,7 +18,7 @@ describe Api::V1::FamiliesController, type: :request do
     context 'when user loged in' do
       before do
         sign_in(user)
-        get '/api/v1/families', @auth_headers
+        get '/api/v1/families', params: @auth_headers
       end
 
       it 'should be return status 200' do
@@ -51,7 +51,7 @@ describe Api::V1::FamiliesController, type: :request do
         let!(:name) { FFaker::Name.name }
         before do
           family_params = { format: 'json', family: { name: name, code: "fam-001", status: 'Active', family_type: 'Other' } }
-          post "/api/v1/families", family_params, @auth_headers
+          post "/api/v1/families", params: family_params, headers: @auth_headers
         end
 
         it 'should return status 200' do
@@ -85,7 +85,7 @@ describe Api::V1::FamiliesController, type: :request do
         let!(:name) { FFaker::Name.name }
         before do
           family_params = { format: 'json', family: { name: name } }
-          put "/api/v1/families/#{families[0].id}", family_params, @auth_headers
+          put "/api/v1/families/#{families[0].id}", params: family_params, headers: @auth_headers
         end
 
         xit 'should return status 200' do

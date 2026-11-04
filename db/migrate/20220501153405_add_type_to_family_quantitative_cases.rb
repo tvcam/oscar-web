@@ -1,4 +1,4 @@
-class AddTypeToFamilyQuantitativeCases < ActiveRecord::Migration
+class AddTypeToFamilyQuantitativeCases < ActiveRecord::Migration[4.2]
   def change
     add_column :family_quantitative_cases, :type, :string, default: 'FamilyQuantitativeCase'
     add_column :family_quantitative_cases, :content, :text

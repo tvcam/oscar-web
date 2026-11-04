@@ -1,4 +1,4 @@
-class AddFieldRoadAndPlotToFamily < ActiveRecord::Migration
+class AddFieldRoadAndPlotToFamily < ActiveRecord::Migration[4.2]
   def change
     add_column :families, :road, :string unless column_exists? :families, :road
     add_column :families, :plot, :string unless column_exists? :families, :plot

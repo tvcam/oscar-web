@@ -1,4 +1,4 @@
-class AddEnabledInternalReferralFieldToSettings < ActiveRecord::Migration
+class AddEnabledInternalReferralFieldToSettings < ActiveRecord::Migration[4.2]
   def change
     add_column :settings, :enabled_internal_referral, :boolean, default: false
     Rails.cache.delete([Apartment::Tenant.current, 'current_setting'])

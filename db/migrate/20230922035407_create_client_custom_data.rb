@@ -1,4 +1,4 @@
-class CreateClientCustomData < ActiveRecord::Migration
+class CreateClientCustomData < ActiveRecord::Migration[4.2]
   def change
     create_table :client_custom_data do |t|
       t.references :client, index: true, foreign_key: true

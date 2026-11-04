@@ -1,4 +1,4 @@
-class AlterClientFkInCaseNotes < ActiveRecord::Migration
+class AlterClientFkInCaseNotes < ActiveRecord::Migration[4.2]
   def up
     schema = schema_search_path.split(',').first.gsub(/\"/, '')
     execute <<-SQL.squish

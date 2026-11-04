@@ -1,4 +1,4 @@
-class CreateRiskAssessments < ActiveRecord::Migration
+class CreateRiskAssessments < ActiveRecord::Migration[4.2]
   def change
     create_table :risk_assessments do |t|
       t.date :assessment_date

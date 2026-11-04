@@ -1,4 +1,4 @@
-class AddDraftToAssessments < ActiveRecord::Migration
+class AddDraftToAssessments < ActiveRecord::Migration[4.2]
   def change
     # check if column exists before adding in case of previously deployed on staging
     add_column :assessments, :draft, :boolean, default: false unless column_exists?(:assessments, :draft)
