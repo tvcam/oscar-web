@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        form_builder_attachments_attributes = params.require(:custom_field_property)[:form_builder_attachments_attributes].try(:clone) || {}
+        form_builder_attachments_attributes = params.require(:custom_field_property)[:form_builder_attachments_attributes].try(:to_unsafe_h) || {}
         custom_field_property = @custom_formable.custom_field_properties.new(custom_field_property_params)
         custom_field_property.user_id = current_user.id
         if custom_field_property.save
@@ -91,6 +91,7 @@ module Api
       end
 
       def map_property_attribute(properties, custom_field)
+        properties = properties.to_unsafe_h if properties.respond_to?(:to_unsafe_h)
         properties.transform_keys do |key|
           custom_field.fields.each do |field|
             key = field['label'] if field['name'] == key
