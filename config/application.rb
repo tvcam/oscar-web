@@ -4,12 +4,12 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require 'apartment/elevators/subdomain'
 
 module CifWeb
   class Application < Rails::Application
-    config.api_only = true
-    config.middleware.use 'Apartment::Elevators::Subdomain'
-    config.middleware.insert_before 'Warden::Manager', 'Apartment::Elevators::Subdomain'
+    config.middleware.use Apartment::Elevators::Subdomain
+    config.middleware.insert_before Warden::Manager, Apartment::Elevators::Subdomain
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -50,8 +50,8 @@ module CifWeb
       end
     end
 
-    # Do not allow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    # Keep Rails 4.2 behaviour: only datetime columns are time-zone aware, not time columns.
+    config.active_record.time_zone_aware_types = [:datetime]
 
     # custom error page
     config.exceptions_app = self.routes

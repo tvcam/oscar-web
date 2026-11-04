@@ -9,7 +9,7 @@ FactoryGirl.define do
     association :user, factory: :user
 
     after(:build) do |task|
-      task.class.skip_callback(:save, :after, :create_task_history)
+      task.class.skip_callback(:save, :after, :create_task_history, raise: false)
     end
 
     trait :task_with_history do

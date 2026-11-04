@@ -22,7 +22,7 @@ namespace :paper_tail_data do
     attribute_arry = %i[id user_id client_id]
     Organization.visible.pluck(:short_name).each do |short_name|
       # next unless short_name == 'demo'
-      Apartment::Tenant.switch short_name
+      Apartment::Tenant.switch! short_name
       PaperTrail::Version.where(item_type: 'CaseWorkerClient', event: 'create').each do |version|
         attributes = attribute_arry.zip(version.changeset.slice(:id, :user_id, :client_id).values.flatten.compact).to_h
         deleted_version = PaperTrail::Version.where(item_type: 'CaseWorkerClient', event: 'destroy').where(item_id: version.item_id).first

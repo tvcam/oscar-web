@@ -4,7 +4,7 @@ FactoryGirl.define do
     created_at { Time.now }
 
     after(:build) do |enter_ngo|
-      enter_ngo.class.skip_callback(:save, :after, :create_enter_ngo_history)
+      enter_ngo.class.skip_callback(:save, :after, :create_enter_ngo_history, raise: false)
     end
 
     trait :client_with_history do

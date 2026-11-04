@@ -4,7 +4,7 @@ class UserNotificationWorker
 
   def perform(user_id, short_name)
     # Do something
-    Apartment::Tenant.switch short_name
+    Apartment::Tenant.switch! short_name
     user = User.find(user_id)
 
     if user.admin? || user.strategic_overviewer?

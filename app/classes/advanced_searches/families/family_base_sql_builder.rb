@@ -40,7 +40,7 @@ module AdvancedSearches
             if form_builder.last == 'Has This Form'
               custom_form_value = CustomField.find_by(form_title: value, entity_type: 'Family').try(:id)
               @sql_string << "families.id IN (?)"
-              @values << @families.joins(:custom_fields).where('custom_fields.id = ?', custom_form_value).uniq.ids
+              @values << @families.joins(:custom_fields).where('custom_fields.id = ?', custom_form_value).distinct.ids
             elsif form_builder.last == 'Does Not Have This Form'
               client_ids = Family.joins(:custom_fields).where(custom_fields: { form_title: form_builder.second }).ids
               @sql_string << "families.id NOT IN (?)"

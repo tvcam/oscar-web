@@ -9,7 +9,7 @@ namespace :active_client_in_kc_fc do
     clients_data = []
 
     Organization.visible.oscar.pluck(:short_name, :full_name).each do |short_name, full_name|
-      Apartment::Tenant.switch short_name
+      Apartment::Tenant.switch! short_name
 
       quantitative_type_disability = QuantitativeType.pluck(:name).select{|custom_data| custom_data[/\/ History of disability and/i] }.first
 

@@ -1,7 +1,7 @@
 class InternalReferralMailer < ApplicationMailer
 
   def send_to(user_id, user_name, user_email, client_id, program_stream_id)
-    Apartment::Tenant.switch 'ratanak'
+    Apartment::Tenant.switch! 'ratanak'
     @user = User.find(user_id)
     @client = Client.find(client_id)
     @program_stream = ProgramStream.find(program_stream_id)

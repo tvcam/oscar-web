@@ -24,7 +24,7 @@ module AdvancedSearches
             if form_builder.last == 'Has This Form'
               custom_form_value = CustomField.find_by(form_title: value, entity_type: 'Partner').try(:id)
               @sql_string << "Partners.id IN (?)"
-              @values << @partners.joins(:custom_fields).where('custom_fields.id = ?', custom_form_value).uniq.ids
+              @values << @partners.joins(:custom_fields).where('custom_fields.id = ?', custom_form_value).distinct.ids
             else
               custom_form = CustomField.find_by(form_title: form_builder.second, entity_type: 'Partner')
               custom_field = AdvancedSearches::EntityCustomFormSqlBuilder.new(custom_form, rule, 'partner').get_sql

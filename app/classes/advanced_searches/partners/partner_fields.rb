@@ -42,7 +42,7 @@ module AdvancedSearches
       end
 
       def organization_types
-        OrganizationType.joins(:partners).uniq.sort.map{ |c| { c.id.to_s => c.name } }
+        OrganizationType.joins(:partners).distinct.sort.map{ |c| { c.id.to_s => c.name } }
       end
     end
   end

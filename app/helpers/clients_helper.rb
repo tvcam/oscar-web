@@ -479,7 +479,7 @@ module ClientsHelper
       if params[:data] == 'recent'
         object.custom_field_properties.order(created_at: :desc).first.try(:custom_field).try(:form_title)
       else
-        object.custom_fields.uniq.each do |obj|
+        object.custom_fields.to_a.uniq.each do |obj|
           concat(content_tag(:li, obj.form_title))
         end
       end
@@ -526,7 +526,7 @@ module ClientsHelper
   end
 
   def form_builder_format_key(value)
-    value.downcase.parameterize('_')
+    value.downcase.parameterize(separator: '_')
   end
 
   def form_builder_format(value)
@@ -602,7 +602,7 @@ module ClientsHelper
       field = domain.convert_identity
       label_column = label_column.merge!("#{field}_": identity)
     end
-    QuantitativeType.joins(:quantitative_cases).where('quantitative_types.visible_on LIKE ?', '%client%').uniq.each do |quantitative_type|
+    QuantitativeType.joins(:quantitative_cases).where('quantitative_types.visible_on LIKE ?', '%client%').distinct.each do |quantitative_type|
       field = quantitative_type.name
       label_column = label_column.merge!("#{field}_": quantitative_type.name)
     end
@@ -1052,7 +1052,7 @@ module ClientsHelper
 
       if count > 0 && class_name != 'case_note_type'
         class_name = class_name =~ /^(formbuilder)/i ? column.name.to_s : class_name
-        link_all = params['all_values'] != class_name ? button_to('All', advanced_search_clients_path, params: params.merge(all_values: class_name), remote: false, form_class: 'all-values') : ''
+        link_all = params['all_values'] != class_name ? button_to('All', advanced_search_clients_path, params: url_params(all_values: class_name), remote: false, form_class: 'all-values') : ''
         [column.header.truncate(65),
          content_tag(:span, count, class: 'label label-info'),
          link_all].join(' ').html_safe

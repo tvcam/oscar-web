@@ -81,10 +81,10 @@ class ProgramStream < ActiveRecord::Base
 
   def self.without_status_by(obj, polymorphic = false)
     if polymorphic
-      ids = includes(:enrollments).where(enrollments: { programmable_id: obj.id }).order('enrollments.status ASC', :name).uniq.collect(&:id)
+      ids = includes(:enrollments).where(enrollments: { programmable_id: obj.id }).order('enrollments.status ASC', :name).distinct.collect(&:id)
       where.not(id: ids).ordered
     else
-      ids = includes(:client_enrollments).where(client_enrollments: { client_id: obj.id }).order('client_enrollments.status ASC', :name).uniq.collect(&:id)
+      ids = includes(:client_enrollments).where(client_enrollments: { client_id: obj.id }).order('client_enrollments.status ASC', :name).distinct.collect(&:id)
       where.not(id: ids).ordered
     end
   end

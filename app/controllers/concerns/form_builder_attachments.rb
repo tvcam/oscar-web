@@ -30,6 +30,30 @@ module FormBuilderAttachments
   end
 
   def attachment_params
+    return @attachment_params if defined?(@attachment_params)
+
+    @attachment_params = unsafe_form_hash(raw_attachment_params)
+  end
+
+  def properties_params
+    return @properties_params if defined?(@properties_params)
+
+    @properties_params = unsafe_form_hash(raw_properties_params)
+  end
+
+  def entity_properties_params
+    return @entity_properties_params if defined?(@entity_properties_params)
+
+    @entity_properties_params = unsafe_form_hash(raw_entity_properties_params)
+  end
+
+  def redirect_back_client_custom_fields
+    redirect_back fallback_location: root_path, alert: 'This custom Form has been locked.'
+  end
+
+  private
+
+  def raw_attachment_params
     if ['client_enrollments', 'client_enrolled_programs'].include?(controller_name)
       params[:client_enrollment][:form_builder_attachments_attributes]
     elsif ['client_enrollment_trackings', 'client_enrolled_program_trackings', 'client_trackings'].include?(controller_name)
@@ -45,7 +69,7 @@ module FormBuilderAttachments
     end
   end
 
-  def properties_params
+  def raw_properties_params
     if ['client_enrollments', 'client_enrolled_programs'].include?(controller_name)
       params[:client_enrollment][:properties]
     elsif ['client_enrollment_trackings', 'client_enrolled_program_trackings', 'client_trackings'].include?(controller_name)
@@ -57,7 +81,7 @@ module FormBuilderAttachments
     end
   end
 
-  def entity_properties_params
+  def raw_entity_properties_params
     if ['enrollments', 'enrolled_programs'].include?(controller_name)
       params[:enrollment][:properties]
     elsif ['enrollment_trackings', 'enrolled_program_trackings', 'trackings'].include?(controller_name)
@@ -65,7 +89,10 @@ module FormBuilderAttachments
     end
   end
 
-  def redirect_back_client_custom_fields
-    redirect_to :back, alert: 'This custom Form has been locked.'
+  # Custom-form answers and attachments are free-form (keys come from the form builder),
+  # so they are read as a plain hash, as they were before Rails 5. Memoized because callers
+  # modify the returned hash in place.
+  def unsafe_form_hash(value)
+    value.respond_to?(:to_unsafe_h) ? value.to_unsafe_h : value
   end
 end

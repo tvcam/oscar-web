@@ -18,8 +18,8 @@ FactoryGirl.define do
     consent_form { [UploadedFile.new(File.open(File.join(Rails.root, '/spec/supports/file.docx')))] }
 
     after(:build) do |referral|
-      referral.class.skip_callback(:save, :after, :create_referral_history)
-      referral.class.skip_callback(:save, :after, :make_a_copy_to_target_ngo)
+      referral.class.skip_callback(:save, :after, :create_referral_history, raise: false)
+      referral.class.skip_callback(:save, :after, :make_a_copy_to_target_ngo, raise: false)
     end
 
     after(:build) do |r|

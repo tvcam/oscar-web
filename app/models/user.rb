@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   scope :hotline_officer, -> { where(roles: 'hotline officer') }
   scope :admins, -> { where(roles: 'admin') }
   scope :province_are, -> { joins(:province).pluck('provinces.name', 'provinces.id').uniq }
-  scope :has_clients, -> { joins(:clients).without_json_fields.uniq }
+  scope :has_clients, -> { joins(:clients).without_json_fields.distinct }
   scope :managers, -> { where(roles: MANAGERS) }
   scope :deleted_users, -> { where.not(deleted_at: nil) }
   scope :without_deleted_users, -> { where(deleted_at: nil) }

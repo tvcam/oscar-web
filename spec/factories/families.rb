@@ -20,7 +20,7 @@ FactoryGirl.define do
     sequence(:code){|n| Time.now.to_f.to_s.last(4) + n.to_s }
 
     after(:build) do |family|
-      family.cases.skip_callback(:save, :after, :create_client_history)
+      family.cases.skip_callback(:save, :after, :create_client_history, raise: false)
     end
 
     trait :emergency do

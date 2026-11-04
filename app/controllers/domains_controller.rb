@@ -92,7 +92,7 @@ class DomainsController < AdminController
   end
 
   def tab_name
-    return "#{@custom_assessment_setting.custom_assessment_name.downcase.strip.parameterize('-')}#{@custom_assessment_setting.id}-custom-csi-tools" if @custom_assessment_setting
+    return "#{@custom_assessment_setting.custom_assessment_name.downcase.strip.parameterize(separator: '-')}#{@custom_assessment_setting.id}-custom-csi-tools" if @custom_assessment_setting
     params[:tab].presence || 'csi-tools'
   end
 end

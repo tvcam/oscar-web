@@ -61,7 +61,7 @@ end
 def import_addresses(tenant_name, files, province_hash, province_code_hash)
   return if tenant_name.nil?
 
-  Apartment::Tenant.switch tenant_name
+  Apartment::Tenant.switch! tenant_name
 
   provinces = Province.where(country: 'cambodia').or(Province.all)
                       .where.not(name: 'Kampong Cham/Prey Chhor/Communex')

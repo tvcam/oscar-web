@@ -52,7 +52,7 @@ class BillableReportExportHandler
         version.created_at.strftime('%d/%m/%Y'),
         client_item.billable_status,
         client.status,
-        client.users.uniq.map(&:name).join(', ')
+        client.users.to_a.uniq.map(&:name).join(', ')
       ])
     end
   end
@@ -80,7 +80,7 @@ class BillableReportExportHandler
         version.created_at.strftime('%d/%m/%Y'),
         family_item.billable_status,
         family.status,
-        family.case_workers.uniq.map(&:name).join(', ')
+        family.case_workers.to_a.uniq.map(&:name).join(', ')
       ])
     end
   end

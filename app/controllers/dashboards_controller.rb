@@ -3,7 +3,7 @@ class DashboardsController < AdminController
   include NotificationConcern
 
   before_action :task_of_user, :find_overdue_task_params, :find_tasks, only: [:index]
-  skip_before_action :notify_user, :set_sidebar_basic_info, only: [:notification, :family_tab, :side_menu_data]
+  skip_before_action :notify_user, :set_sidebar_basic_info, only: [:notification, :family_tab, :side_menu_data], raise: false
 
   def index
     respond_to do |f|

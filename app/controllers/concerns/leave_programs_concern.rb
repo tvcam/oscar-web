@@ -11,7 +11,7 @@ module LeaveProgramsConcern
 
     default_params = params.require(:leave_program).permit(:exit_date).merge!(program_stream_id: params[:program_stream_id])
     default_params = default_params.merge!(properties: formatted_params) if formatted_params.present?
-    default_params = default_params.merge!(form_builder_attachments_attributes: params[:leave_program][:form_builder_attachments_attributes]) if action_name == 'create' && attachment_params.present?
+    default_params = default_params.merge!(form_builder_attachments_attributes: attachment_params) if action_name == 'create' && attachment_params.present?
     default_params
   end
 

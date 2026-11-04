@@ -5,7 +5,7 @@ namespace :indonesian_addresses do
     # response = service_request(url)
     short_name = args.short_name
     if short_name.present?
-      Apartment::Tenant.switch short_name
+      Apartment::Tenant.switch! short_name
       import_provinces(short_name)
       import_cities(short_name)
       import_districts(short_name)

@@ -38,7 +38,7 @@ class Domain < ActiveRecord::Base
   enum domain_score_colors: { danger: 'Red', warning: 'Yellow', success: 'Blue', primary: 'Green' }
 
   def convert_identity
-    identity.downcase.parameterize('_')
+    identity.downcase.parameterize(separator: '_')
   end
 
   def convert_custom_identity

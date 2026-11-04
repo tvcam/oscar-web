@@ -37,7 +37,7 @@ namespace :report_for_save do
     families = []
     index = 0
     organizations.each_with_index do |organization, _|
-      Apartment::Tenant.switch organization['short_name']
+      Apartment::Tenant.switch! organization['short_name']
       donor_ids = Donor.where("LOWER(donors.name) = 'fcf' OR LOWER(donors.name) = 'react'").ids
       clients = Client.joins(:donors).where(sponsors: { donor_id: donor_ids })
 
@@ -50,9 +50,9 @@ namespace :report_for_save do
         default_assessments = client.assessments.defaults
         qtypes = client.quantitative_cases.group_by(&:quantitative_type).map{|quantitative, quantitative_cases| [quantitative.name, quantitative_cases.map(&:value).join(', ')] }.to_h
 
-        Apartment::Tenant.switch 'shared'
+        Apartment::Tenant.switch! 'shared'
         birth_province = client.birth_province && client.birth_province.name
-        Apartment::Tenant.switch organization['short_name']
+        Apartment::Tenant.switch! organization['short_name']
 
         values = [
           index = index + 1,

@@ -126,7 +126,7 @@ module Api
             Client.update_external_ids(ngo.short_name, client_ngos.map(&:last), data_hash)
           end
 
-          Apartment::Tenant.switch('public')
+          Apartment::Tenant.switch!('public')
           render json: { message: 'Record saved.' }, root: :data
         else
           render json: { error: client.errors, message: 'Record error. Please check OSCaR logs for details.' }, root: :data, status: :unprocessable_entity

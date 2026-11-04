@@ -6,7 +6,7 @@ FactoryGirl.define do
     association :program_stream, factory: :program_stream
 
     after(:build) do |client_enrollment|
-      client_enrollment.class.skip_callback(:save, :after, :create_client_enrollment_history)
+      client_enrollment.class.skip_callback(:save, :after, :create_client_enrollment_history, raise: false)
     end
 
     factory :client_enrollment_with_history do

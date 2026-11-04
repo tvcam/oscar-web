@@ -25,7 +25,7 @@ class CaseNotesController < AdminController
 
   def new
     routes_params = params.to_unsafe_h.slice('from', 'custom', 'custom_name')
-    redirect_to(edit_client_case_note_path(@client, routes_params.merge(id: :draft)))
+    redirect_to(edit_client_case_note_path(@client, routes_params.symbolize_keys.merge(id: :draft)))
   end
 
   def show

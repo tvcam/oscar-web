@@ -4,4 +4,4 @@
       - if params[:data] == 'recent'
         = "#{t('datagrid.columns.clients.total')} : #{object.custom_field_properties.last.present? ? 1 : 0}"
       - else
-        = "#{t('datagrid.columns.clients.total')} : #{object.custom_fields.uniq.size}"
+        = "#{t('datagrid.columns.clients.total')} : #{object.custom_fields.to_a.uniq.size}"

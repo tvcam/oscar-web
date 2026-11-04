@@ -2,7 +2,7 @@ namespace :referral_referred_from_uid do
   desc 'Migrate Referral ID to target NGOs'
   task migrate: :environment do
     Organization.pluck(:short_name).each do |short_name|
-      Apartment::Tenant.switch short_name
+      Apartment::Tenant.switch! short_name
 
       Referral.where(referred_from: short_name).each do |referral|
         referral_id = referral.id

@@ -1,7 +1,7 @@
 namespace :nepali_provinces do
   desc "Import Nepali addesses"
   task :import, [:tenant] => [:environment] do |task, args|
-    Apartment::Tenant.switch(args[:tenant]) if args[:tenant]
+    Apartment::Tenant.switch!(args[:tenant]) if args[:tenant]
 
     Spreadsheet.client_encoding = 'UTF-8'
     if Rails.env.development?

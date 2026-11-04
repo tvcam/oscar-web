@@ -1,7 +1,7 @@
 namespace :duplicated_tasks do
   desc 'Removed duplicated tasks for Ratanak'
   task remove: :environment do
-    Apartment::Tenant.switch 'ratanak'
+    Apartment::Tenant.switch! 'ratanak'
     sql = <<~SQL
       SELECT *
       FROM tasks AS t1

@@ -25,7 +25,7 @@ class ClientsSyncedMonthlyReport
     sheet.insert_row(0, columns)
 
     Organization.only_integrated.each_with_index do |ngo, index|
-      Apartment::Tenant.switch ngo.short_name
+      Apartment::Tenant.switch! ngo.short_name
       clients = Client.where('synced_date IS NOT NULL AND DATE(synced_date) BETWEEN ? AND ?', beginning_of_previous_month, end_of_previous_month)
 
       client_hash = {
