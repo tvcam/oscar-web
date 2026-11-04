@@ -401,17 +401,17 @@ class User < ActiveRecord::Base
   def get_custom_fields_by_role
     roles = ['admin', 'manager']
     user_role = self.roles
-    roles.include?(user_role) ? CustomField.order('lower(form_title)') : CustomField.client_forms.order('lower(form_title)')
+    roles.include?(user_role) ? CustomField.order(Arel.sql('lower(form_title)')) : CustomField.client_forms.order(Arel.sql('lower(form_title)'))
   end
 
   def populate_program_streams
-    ProgramStream.order('lower(name)').where.not(id: program_streams.ids).each do |ps|
+    ProgramStream.order(Arel.sql('lower(name)')).where.not(id: program_streams.ids).each do |ps|
       program_stream_permissions.build(program_stream_id: ps.id)
     end
   end
 
   def populate_quantitative_types
-    QuantitativeType.order('lower(name)').each do |qt|
+    QuantitativeType.order(Arel.sql('lower(name)')).each do |qt|
       quantitative_type_permissions.build(quantitative_type_id: qt.id)
     end
   end

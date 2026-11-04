@@ -19,7 +19,7 @@ class CustomFieldDatatable < ApplicationDatatable
   end
 
   def fetch_custom_fields
-    eval("CustomField.#{@type}").visible.order("lower(#{sort_column}) #{sort_direction}").page(page).per(per_page)
+    eval("CustomField.#{@type}").visible.order(Arel.sql("lower(#{sort_column}) #{sort_direction}")).page(page).per(per_page)
   end
 
   def columns

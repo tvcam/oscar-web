@@ -367,7 +367,7 @@ module Api
       clients, _query = AdvancedSearches::ClientAdvancedSearch.new(basic_rules, Client.accessible_by(current_ability)).filter
 
       assessments = Assessment.joins(:client).where(default: params[:default], client_id: clients.ids)
-      assessments = assessments.includes(:assessment_domains).order("#{sort_column} #{sort_direction}").references(:assessment_domains, :client)
+      assessments = assessments.includes(:assessment_domains).order(Arel.sql("#{sort_column} #{sort_direction}")).references(:assessment_domains, :client)
 
       assessment_data = params[:length] != '-1' ? assessments.page(page).per(per_page) : assessments
     end

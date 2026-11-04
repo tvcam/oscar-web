@@ -44,7 +44,7 @@ class ProgramStream < ActiveRecord::Base
   after_create :build_permission
   after_commit :flush_cache
 
-  scope :ordered, -> { order('lower(name) ASC') }
+  scope :ordered, -> { order(Arel.sql('lower(name) ASC')) }
   scope :complete, -> { where(completed: true) }
   scope :ordered_by, -> (column) { order(column) }
   scope :filter, -> (value) { where(id: value) }

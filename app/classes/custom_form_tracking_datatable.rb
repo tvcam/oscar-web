@@ -21,7 +21,7 @@ class CustomFormTrackingDatatable < ApplicationDatatable
   def fetch_custom_fields(entity_type = nil)
     if @ngo_custom_field == 'current_custom_field'
       custom_fields = entity_type ? CustomField.where(entity_type: entity_type) : CustomField.client_forms
-      custom_fields = custom_fields.order("#{sort_column} #{sort_direction}")
+      custom_fields = custom_fields.order(Arel.sql("#{sort_column} #{sort_direction}"))
     elsif @ngo_custom_field == 'all_custom_field'
       custom_fields = find_custom_field_in_organization(nil, entity_type)
     elsif @ngo_custom_field == 'demo_custom_field'

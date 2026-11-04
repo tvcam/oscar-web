@@ -19,7 +19,7 @@
                     %ul.dropdown-menu#case-note-dropdown
                       %li
                         - if case_notes_editable? && policy(@family).create?
-                          = link_to new_polymorphic_path([@family, 'case_note'], custom: false) do
+                          = link_to new_polymorphic_path([@family, :case_note], custom: false) do
                             = t('domains.index.family_csi_tool')
                         - else
                           = link_to_if false, '' do

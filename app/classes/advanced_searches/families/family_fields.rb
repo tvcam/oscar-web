@@ -102,7 +102,7 @@ module AdvancedSearches
       end
 
       def clients
-        Client.joins(:families).order('lower(clients.given_name)').pluck('clients.given_name, clients.family_name, clients.id').uniq.map { |s| { s[2].to_s => "#{s[0]} #{s[1]}" } }
+        Client.joins(:families).order(Arel.sql('lower(clients.given_name)')).pluck(Arel.sql('clients.given_name, clients.family_name, clients.id')).uniq.map { |s| { s[2].to_s => "#{s[0]} #{s[1]}" } }
       end
 
       def family_id_poor

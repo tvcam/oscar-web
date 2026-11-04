@@ -1434,7 +1434,7 @@ module ClientsHelper
     if current_organization.short_name != 'brc'
       QuantitativeType.all
     else
-      QuantitativeType.unscoped.where('quantitative_types.visible_on LIKE ?', '%client%').order("substring(quantitative_types.name, '^[0-9]+')::int, substring(quantitative_types.name, '[^0-9]*$')")
+      QuantitativeType.unscoped.where('quantitative_types.visible_on LIKE ?', '%client%').order(Arel.sql("substring(quantitative_types.name, '^[0-9]+')::int, substring(quantitative_types.name, '[^0-9]*$')"))
     end
   end
 

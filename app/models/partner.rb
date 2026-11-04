@@ -19,7 +19,7 @@ class Partner < ActiveRecord::Base
   scope :engagement_like,            ->(value) { where('engagement iLIKE ?', "%#{value.squish}%") }
   scope :background_like,            ->(value) { where('background iLIKE ?', "%#{value.squish}%") }
   scope :address_like,               ->(value) { where('address iLIKE ?', "%#{value.squish}%") }
-  scope :organization_type_are,      ->        { joins(:organization_type).order('lower(organization_types.name)').pluck('organization_types.name', 'organization_types.id').uniq }
+  scope :organization_type_are,      ->        { joins(:organization_type).order(Arel.sql('lower(organization_types.name)')).pluck('organization_types.name', 'organization_types.id').uniq }
   scope :province_are,               ->        { joins(:province).pluck('provinces.name', 'provinces.id').uniq }
   scope :NGO,                        ->        { joins(:organization_type).where(organization_types: { name: 'NGO' }) }
   scope :local_goverment,            ->        { joins(:organization_type).where(organization_types: { name: 'Local Goverment' }) }

@@ -177,9 +177,9 @@ class Client < ActiveRecord::Base
   scope :start_with_code, -> (value) { where('clients.code iLIKE ?', "#{value}%") }
   scope :find_by_family_id, -> (value) { joins(cases: :family).where('families.id = ?', value).distinct }
   scope :status_like, -> { CLIENT_STATUSES }
-  scope :is_received_by, -> { joins(:received_by).pluck("CONCAT(users.first_name, ' ' , users.last_name)", 'users.id').uniq }
+  scope :is_received_by, -> { joins(:received_by).pluck(Arel.sql("CONCAT(users.first_name, ' ' , users.last_name)"), 'users.id').uniq }
   scope :referral_source_is, -> { joins(:referral_source).where.not('referral_sources.name in (?)', ReferralSource::REFERRAL_SOURCES).pluck('referral_sources.name', 'referral_sources.id').uniq }
-  scope :is_followed_up_by, -> { joins(:followed_up_by).pluck("CONCAT(users.first_name, ' ' , users.last_name)", 'users.id').uniq }
+  scope :is_followed_up_by, -> { joins(:followed_up_by).pluck(Arel.sql("CONCAT(users.first_name, ' ' , users.last_name)"), 'users.id').uniq }
   scope :province_is, -> { joins(:province).pluck('provinces.name', 'provinces.id').uniq }
   scope :birth_province_is, -> { joins(:birth_province).pluck('provinces.name', 'provinces.id').uniq }
   scope :accepted, -> { where(status: 'Accepted') }
@@ -645,12 +645,12 @@ class Client < ActiveRecord::Base
     if archived_slug.present?
       if slug.in? Client.pluck(:slug)
         random_char = slug.split('-')[0]
-        paper_trail.without_versioning { |obj| obj.update_columns(slug: "#{random_char}-#{id}") }
+        PaperTrail.request(enabled_for_Client: false) { update_columns(slug: "#{random_char}-#{id}") }
       end
     else
       random_char = generate_random_char
       Organization.switch_to short_name
-      paper_trail.without_versioning { |obj| obj.update_columns(slug: "#{random_char}-#{id}", archived_slug: "#{Organization.current.try(:short_name)}-#{id}") }
+      PaperTrail.request(enabled_for_Client: false) { update_columns(slug: "#{random_char}-#{id}", archived_slug: "#{Organization.current.try(:short_name)}-#{id}") }
     end
   end
 
