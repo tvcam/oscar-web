@@ -1024,11 +1024,11 @@ class ClientGrid < BaseGrid
   end
 
   column(:user_id, preload: :users, order: false, header: -> { I18n.t('datagrid.columns.clients.case_worker') }) do |object|
-    object.users.uniq.map { |case_worker| "#{case_worker.first_name} #{case_worker.last_name}".squish }.join(', ')
+    object.users.to_a.uniq.map { |case_worker| "#{case_worker.first_name} #{case_worker.last_name}".squish }.join(', ')
   end
 
   column(:donor_name, preload: :donors, order: false, header: -> { I18n.t('datagrid.columns.clients.donor') }) do |object|
-    object.donors.uniq.map(&:name).join(', ')
+    object.donors.to_a.uniq.map(&:name).join(', ')
   end
 
   column(:arrival_at, header: -> { I18n.t('clients.form.arrival_at') }) do |object|

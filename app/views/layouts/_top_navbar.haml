@@ -41,7 +41,7 @@
               - supported_languages.each do |supported_lang|
                 - next unless supported_languages_data.dig(supported_lang.to_sym, :flag_file_name)
 
-                = link_to(url_for(params.merge({locale: supported_lang})), id: "lang-#{supported_lang}", method: request_method) do
+                = link_to(url_for(url_params(locale: supported_lang)), id: "lang-#{supported_lang}", method: request_method) do
                   = image_tag(supported_languages_data.dig(supported_lang.to_sym, :flag_file_name))
                   = supported_languages_data.dig(supported_lang.to_sym, :label)
       - if user_signed_in? && !current_organization.international?

@@ -21,7 +21,7 @@ class ClientsSyncedReport
     sheet.insert_row(0, columns)
 
     Organization.only_integrated.each_with_index do |ngo, index|
-      Apartment::Tenant.switch ngo.short_name
+      Apartment::Tenant.switch! ngo.short_name
       clients = Client.where.not(external_id: nil).where.not(external_id: '')
 
       client_hash = {

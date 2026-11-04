@@ -3,14 +3,14 @@ namespace :global_service do
   task :drop_constrain, [:short_name] => :environment do |task, args|
     service_data_file = Rails.root.join('lib/devdata/services/service.xlsx')
     if args.short_name
-      Apartment::Tenant.switch args.short_name
+      Apartment::Tenant.switch! args.short_name
       ActiveRecord::Base.connection.execute("ALTER TABLE #{args.short_name}.global_services DROP CONSTRAINT IF EXISTS fk_rails_dd8845518e")
       ActiveRecord::Base.connection.execute("ALTER TABLE #{args.short_name}.services DROP CONSTRAINT IF EXISTS fk_rails_dd8845518e;")
       ImportStaticService::DateService.new('Services', args.short_name, service_data_file).import
       update_services_uuid unless Service.count.zero?
     else
       Organization.without_shared.each do |org|
-        Apartment::Tenant.switch org.short_name
+        Apartment::Tenant.switch! org.short_name
         puts "=====================dropping contrain on schema #{org.short_name} ====================================="
         ActiveRecord::Base.connection.execute("ALTER TABLE #{org.short_name}.global_services DROP CONSTRAINT IF EXISTS fk_rails_dd8845518e;")
         ActiveRecord::Base.connection.execute("ALTER TABLE #{org.short_name}.services DROP CONSTRAINT IF EXISTS fk_rails_dd8845518e;")

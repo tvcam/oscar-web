@@ -6,7 +6,7 @@ FactoryGirl.define do
     exit_reasons ['Client is/moved outside NGO target area (within Cambodia)']
 
     after(:build) do |exit_ngo|
-      exit_ngo.class.skip_callback(:save, :after, :create_exit_ngo_history)
+      exit_ngo.class.skip_callback(:save, :after, :create_exit_ngo_history, raise: false)
     end
 
     trait :exit_ngo_with_history do

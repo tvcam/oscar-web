@@ -11,7 +11,7 @@ FactoryGirl.define do
     association :program_stream
 
     after(:build) do |leave_program|
-      leave_program.class.skip_callback(:save, :after, :create_leave_program_history)
+      leave_program.class.skip_callback(:save, :after, :create_leave_program_history, raise: false)
     end
 
     trait :leave_program_with_history do

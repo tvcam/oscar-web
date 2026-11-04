@@ -5,7 +5,7 @@ FactoryGirl.define do
     association :tracking, factory: :tracking
 
     after(:build) do |enrollment_tracking|
-      enrollment_tracking.class.skip_callback(:save, :after, :create_entity_enrollment_tracking_history)
+      enrollment_tracking.class.skip_callback(:save, :after, :create_entity_enrollment_tracking_history, raise: false)
     end
 
     trait :with_history do

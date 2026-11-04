@@ -268,7 +268,7 @@ module AdvancedSearches
         end
         return family_ids.flatten.uniq
       end
-      family_ids = assessments.uniq.pluck(:family_id) unless @operator == 'is_empty'
+      family_ids = assessments.distinct.pluck(:family_id) unless @operator == 'is_empty'
     end
 
     def all_domains_query

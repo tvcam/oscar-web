@@ -2,7 +2,7 @@ class InternalReferralWorker
   include Sidekiq::Worker
 
   def perform(*args)
-    Apartment::Tenant.switch 'ratanak'
+    Apartment::Tenant.switch! 'ratanak'
     user_id = args[0]
     client_id = args[1]
     program_stream_ids = args[2]

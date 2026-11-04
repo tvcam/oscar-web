@@ -7,7 +7,7 @@ module Api
       before_action :authenticate_user!, if: :user_authenticated?
       before_action :doorkeeper_authorize!, if: :doorkeeper_controller?
       before_action :current_resource_owner
-      before_filter :set_current_user
+      before_action :set_current_user
 
       private
 

@@ -5,7 +5,7 @@ class ClientColumnsVisibility
 
   def initialize(grid, params)
     @grid = grid
-    @params = params
+    @params = params.respond_to?(:to_unsafe_h) ? params.to_unsafe_h : params
     address_translation
   end
 

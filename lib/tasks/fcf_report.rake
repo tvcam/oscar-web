@@ -13,7 +13,7 @@ namespace :fcf_report do
       worksheet = workbook.add_worksheet(sheet_name)
 
       Organization.visible.oscar.pluck(:short_name, :full_name).each do |short_name, full_name|
-        Apartment::Tenant.switch short_name
+        Apartment::Tenant.switch! short_name
         Client.joins("INNER JOIN referral_sources ON clients.referral_source_category_id = referral_sources.id").where(created_at: [date..Date.parse(date).end_of_month.to_s]).each do |client|
           clients_data << [
             client.slug,

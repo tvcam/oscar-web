@@ -297,7 +297,7 @@ module AdvancedSearches
         end
         return client_ids.flatten.uniq
       end
-      client_ids = assessments.uniq.pluck(:client_id) unless @operator == 'is_empty'
+      client_ids = assessments.distinct.pluck(:client_id) unless @operator == 'is_empty'
     end
 
     def all_domains_query

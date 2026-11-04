@@ -13,9 +13,9 @@ class Province < ActiveRecord::Base
   has_many :settings, dependent: :restrict_with_error
   has_many :government_forms, dependent: :restrict_with_error
 
-  scope :has_clients, -> { joins(:clients).uniq }
+  scope :has_clients, -> { joins(:clients).distinct }
 
-  scope :birth_places, -> { joins('RIGHT JOIN clients ON clients.birth_province_id = Provinces.id').uniq }
+  scope :birth_places, -> { joins('RIGHT JOIN clients ON clients.birth_province_id = Provinces.id').distinct }
 
   scope :country_is, -> (country) { where(country: country).order(:name) }
   scope :official, -> { where.not(name: ['បោយប៉ែត/Poipet', 'Community', 'Other / ផ្សេងៗ', 'នៅ​ខាង​ក្រៅ​កម្ពុជា / Outside Cambodia']) }

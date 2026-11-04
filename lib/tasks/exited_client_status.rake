@@ -2,12 +2,12 @@ namespace :exited_client_status do
   desc 'Correct Exited client status'
   task :correct, [:short_name] => :environment do |task, args|
     if args.short_name
-      Apartment::Tenant.switch args.short_name
+      Apartment::Tenant.switch! args.short_name
       clients = Client.where(status: 'Accepted')
       update_wrong_status(clients)
     else
       Organization.without_shared.oscar.each do |org|
-        Apartment::Tenant.switch org.short_name
+        Apartment::Tenant.switch! org.short_name
         clients = Client.where(status: 'Accepted')
         update_wrong_status(clients)
       end

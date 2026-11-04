@@ -34,7 +34,7 @@
           %td= no_program_clients.where(province_id: province.id).female_shared_clients.count
           %td= no_program_clients.where(province_id: province.id).male_shared_clients.count
           %td= no_program_clients.where(province_id: province.id).non_binary_shared_clients.count
-        %td= no_program_clients.uniq.count
+        %td= no_program_clients.distinct.count
 
       %tr
         %td= t('clients.table_summary.client_by_gender')

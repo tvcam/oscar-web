@@ -10,7 +10,7 @@ module ClientEnrollmentConcern
     end
     default_params = params.require(:client_enrollment).permit(:enrollment_date).merge!(program_stream_id: params[:program_stream_id])
     default_params = default_params.merge!(properties: formatted_params) if formatted_params.present?
-    default_params = default_params.merge!(form_builder_attachments_attributes: params[:client_enrollment][:form_builder_attachments_attributes]) if action_name == 'create' && attachment_params.present?
+    default_params = default_params.merge!(form_builder_attachments_attributes: attachment_params) if action_name == 'create' && attachment_params.present?
     default_params
   end
 

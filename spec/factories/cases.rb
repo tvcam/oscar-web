@@ -10,7 +10,7 @@ FactoryGirl.define do
     association :partner, factory: :partner
 
     after(:build) do |cases|
-      cases.class.skip_callback(:save, :after, :create_client_history)
+      cases.class.skip_callback(:save, :after, :create_client_history, raise: false)
     end
 
     trait :case_with_history do

@@ -52,7 +52,7 @@ class UsageReportBuilder < ServiceBase
       adult_male_with_disability: clients_has_disability_from_primero.count(&:adult_male?),
       child_female_with_disability: clients_has_disability_from_primero.count(&:child_female?),
       child_male_with_disability: clients_has_disability_from_primero.count(&:child_female?),
-      provinces: Province.joins(:clients).where(clients: { id: clients_from_primero.map(&:id) }).uniq.pluck(:name).compact,
+      provinces: Province.joins(:clients).where(clients: { id: clients_from_primero.map(&:id) }).distinct.pluck(:name).compact,
     }
 
     data[:adult_female_without_disability] = data[:adult_female] - data[:adult_female_with_disability]
@@ -84,7 +84,7 @@ class UsageReportBuilder < ServiceBase
       adult_male_with_disability: clients_has_disability_to_primero.count(&:adult_male?),
       child_female_with_disability: clients_has_disability_to_primero.count(&:child_female?),
       child_male_with_disability: clients_has_disability_to_primero.count(&:child_female?),
-      provinces: Province.joins(:clients).where(clients: { id: clients_to_primero.map(&:id) }).uniq.pluck(:name).compact,
+      provinces: Province.joins(:clients).where(clients: { id: clients_to_primero.map(&:id) }).distinct.pluck(:name).compact,
     }
 
     data[:adult_female_without_disability] = data[:adult_female] - data[:adult_female_with_disability]

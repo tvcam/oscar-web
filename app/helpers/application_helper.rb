@@ -101,7 +101,14 @@ module ApplicationHelper
   end
 
   def current_url(new_params)
-    url_for params: params.merge(new_params)
+    url_for params: url_params(new_params)
+  end
+
+  # Current request params as a plain hash, for rebuilding the current URL or form
+  # (locale switcher, pagination, sorting). Keys that would let a query string point
+  # the generated link at another host are dropped.
+  def url_params(extra = {})
+    params.to_unsafe_h.except(:host, :protocol, :port, :domain, :subdomain, :script_name, :only_path).merge(extra)
   end
 
   def remove_link(object, associated_objects = {}, btn_size = 'btn-xs', custom_assessment_setting_id = nil, tab_name = nil)

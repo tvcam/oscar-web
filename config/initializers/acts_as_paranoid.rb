@@ -14,3 +14,18 @@ ActsAsParanoid::Core.module_eval do
   end
 end
 
+
+# Apartment's excluded models have schema-qualified table names ("public.organizations").
+# acts_as_paranoid builds hash keys like "public.organizations.deleted_at", which Rails 5+
+# parses as table "public" / column "organizations". Use the unqualified table name instead;
+# PostgreSQL resolves "organizations"."deleted_at" against FROM "public"."organizations".
+module ActsAsParanoidSchemaQualifiedTables
+  def acts_as_paranoid(options = {})
+    super
+    define_singleton_method(:paranoid_column_reference) do
+      "#{table_name.to_s.split('.').last}.#{paranoid_configuration[:column]}"
+    end
+  end
+end
+
+ActiveRecord::Base.singleton_class.prepend(ActsAsParanoidSchemaQualifiedTables)

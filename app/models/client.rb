@@ -175,7 +175,7 @@ class Client < ActiveRecord::Base
   scope :local_family_name_like, -> (value) { where('clients.local_family_name iLIKE ?', "%#{value.squish}%") }
   scope :slug_like, -> (value) { where('clients.slug iLIKE ?', "%#{value.squish}%") }
   scope :start_with_code, -> (value) { where('clients.code iLIKE ?', "#{value}%") }
-  scope :find_by_family_id, -> (value) { joins(cases: :family).where('families.id = ?', value).uniq }
+  scope :find_by_family_id, -> (value) { joins(cases: :family).where('families.id = ?', value).distinct }
   scope :status_like, -> { CLIENT_STATUSES }
   scope :is_received_by, -> { joins(:received_by).pluck("CONCAT(users.first_name, ' ' , users.last_name)", 'users.id').uniq }
   scope :referral_source_is, -> { joins(:referral_source).where.not('referral_sources.name in (?)', ReferralSource::REFERRAL_SOURCES).pluck('referral_sources.name', 'referral_sources.id').uniq }

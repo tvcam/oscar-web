@@ -35,7 +35,7 @@ class FamilySerializer < ActiveModel::Serializer
   end
 
   def additional_form
-    custom_fields = object.custom_fields.uniq.sort_by(&:form_title)
+    custom_fields = object.custom_fields.to_a.uniq.sort_by(&:form_title)
     custom_fields.map do |custom_field|
       custom_field_property_file_upload = custom_field.custom_field_properties.where(custom_formable_id: object.id)
       custom_field_property_file_upload.each do |custom_field_property|

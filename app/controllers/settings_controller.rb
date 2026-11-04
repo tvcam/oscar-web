@@ -33,7 +33,7 @@ class SettingsController < AdminController
   def update
     if params[:setting].key?(:org_form)
       if @setting.update_attributes(setting_params)
-        redirect_to :back, notice: t('.successfully_updated')
+        redirect_back fallback_location: root_path, notice: t('.successfully_updated')
       else
         render :edit
       end
@@ -41,7 +41,7 @@ class SettingsController < AdminController
       respond_to do |f|
         f.html do
           if @setting.update_attributes(setting_params)
-            redirect_to :back, notice: t('.successfully_updated')
+            redirect_back fallback_location: root_path, notice: t('.successfully_updated')
           else
             flash[:alert] = @setting.errors.full_messages.join(', ')
             render :index
@@ -110,7 +110,7 @@ class SettingsController < AdminController
     return unless request.put?
 
     if @setting.update_attributes(setting_params)
-      redirect_to :back, notice: t('.successfully_updated')
+      redirect_back fallback_location: root_path, notice: t('.successfully_updated')
     else
       render :header_count
     end
@@ -139,7 +139,7 @@ class SettingsController < AdminController
     end
 
     if attribute && @setting.update_attributes(selected_domain_param || setting_params)
-      redirect_to :back, notice: t('successfully_updated', klass: t('settings.update.successfully_updated'))
+      redirect_back fallback_location: root_path, notice: t('successfully_updated', klass: t('settings.update.successfully_updated'))
     else
       flash[:alert] = @setting.errors.full_messages.join(', ') if @setting.errors.full_messages.any?
       render :risk_assessment
@@ -214,7 +214,7 @@ class SettingsController < AdminController
     Domain.client_domians.order_by_identity.each do |domain|
       columns << "#{domain.convert_identity}_"
     end
-    QuantitativeType.joins(:quantitative_cases).uniq.each do |quantitative_type|
+    QuantitativeType.joins(:quantitative_cases).distinct.each do |quantitative_type|
       columns << "#{quantitative_type.name}_"
     end
     sub_columns = sub_columns.push(international_address_columns)

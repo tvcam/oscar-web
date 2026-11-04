@@ -6,7 +6,7 @@ FactoryGirl.define do
     association :custom_formable, factory: :client
 
     after(:build) do |custom_field_property|
-      custom_field_property.class.skip_callback(:save, :after, :create_client_history)
+      custom_field_property.class.skip_callback(:save, :after, :create_client_history, raise: false)
     end
 
     factory :custom_field_property_with_history do

@@ -2,7 +2,7 @@ namespace :school_grade do
   desc "fix school grade value, khmer translation"
   task fix: :environment do
     Organization.without_shared.pluck(:short_name).each do |short_name|
-      Apartment::Tenant.switch short_name
+      Apartment::Tenant.switch! short_name
       puts "Start NGO #{short_name}"
       school_grade_list = {
                "ថ្នាក់មតេយ្យកម្រិត ១" => 'kindergarten_1',

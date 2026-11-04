@@ -29,7 +29,7 @@ module AdvancedSearches
             if form_builder.last == 'Has This Form'
               custom_form_value = CustomField.find_by(form_title: value, entity_type: 'Community').try(:id)
               @sql_string << "Communities.id IN (?)"
-              @values << @communities.joins(:custom_fields).where('custom_fields.id = ?', custom_form_value).uniq.ids
+              @values << @communities.joins(:custom_fields).where('custom_fields.id = ?', custom_form_value).distinct.ids
             elsif rule['operator'] == 'is_empty'
               community_ids = Community.joins(:custom_fields).where(custom_fields: { form_title: form_builder.second }).ids
               @sql_string << "Communities.id NOT IN (?)"

@@ -37,7 +37,7 @@ namespace :geoname_data do
     }
 
     provinces = []
-    Apartment::Tenant.switch('shared')
+    Apartment::Tenant.switch!('shared')
 
     provinces = Province.where(country: 'cambodia').or(Province.all).where.not(name: 'Kampong Cham/Prey Chhor/Communex')
     provinces_names = provinces.pluck(:code, :name)

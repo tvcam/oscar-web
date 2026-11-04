@@ -18,8 +18,8 @@ class Case < ActiveRecord::Base
   scope :last_exited,    -> { order('exit_date desc').first }
   scope :active,         -> { where(exited: false) }
   scope :inactive,       -> { where(exited: true) }
-  scope :with_reports,   -> { joins(:quarterly_reports).uniq }
-  scope :with_contracts, -> { joins(:case_contracts).uniq }
+  scope :with_reports,   -> { joins(:quarterly_reports).distinct }
+  scope :with_contracts, -> { joins(:case_contracts).distinct }
   scope :case_types,     -> { exclude_referred.pluck(:case_type).uniq }
   scope :currents,       -> { active.where(current: true) }
   scope :exclude_referred, -> { where.not(case_type: 'Referred') }
