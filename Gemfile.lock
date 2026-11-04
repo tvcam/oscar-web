@@ -912,7 +912,6 @@ DEPENDENCIES
   bourbon (~> 4.2)
   browser (~> 2.1)
   bullet (= 5.4.3)
-  bundler (= 1.17.3)
   cancancan (~> 1.13, >= 1.13.1)
   capistrano (= 3.9.0)
   capistrano-foreman
@@ -1020,4 +1019,4 @@ DEPENDENCIES
   x-editable-rails (~> 1.5, >= 1.5.5.1)
 
 BUNDLED WITH
-   1.17.3
+   2.3.27
